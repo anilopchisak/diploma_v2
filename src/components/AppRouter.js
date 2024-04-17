@@ -7,9 +7,8 @@ import IngredientListChecker from "../pages/IngredientListChecker";
 
 const AppRouter = observer(() => {
     const {user} = useContext(Context)
-    return(
+    return (
         <Routes>
-            // exact (ключ) - путь должен точно совпадать
             {user.isAuth && authRoutes.map((a) =>
                 <Route key={a.path} path = {a.path} element={a.element} exact/>
             )}

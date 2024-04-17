@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;700&display=swap");
-
+/*@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;700&display=swap");*/
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,22 +9,40 @@
 
 :root {
   --header-height: 3.5rem;
-  --first-color: hsl(28, 88%, 62%);
-  --title-color: hsl(0, 0%, 95%);
-  --text-color: hsl(0, 0%, 75%);
-  --body-color: hsl(0, 0%, 6%);
-  --body-font: "Montserrat", sans-serif;
-  --second-font: "Dancing Script", cursive;
-  --h2-font-size: 1.25rem;
-  --small-font-size: 0.813rem;
-  --font-semi-bold: 600;
+
+  --1-color: black;
+  --2-color: #fffdfe; /*title*/
+  --3-color: #470447; /*text*/
+  /*--4h-color: hsl(0, 0%, 100%); !*body*!*/
+  --bg-color-1: #fff4e7;
+  --bg-color-2: #e9cfd9;
+  --bg-color-3: #a098bf;
+  --bg-color-nav: hsla(0, 0%, 6%, 0.2);
+
+  --body-font: "Comfortaa", sans-serif;
+  --second-font: "Raleway", sans-serif;
+
+  --font-size-lg: 18px;
+  --h1-font-size-lg: 26px;
+  --h2-font-size-lg: 22px;
+
+  --font-size-md: 20px;
+  --h1-font-size-md: 28px;
+  --h2-font-size-md: 24px;
+
+  --font-size-sm: 22px;
+  --h1-font-size-sm: 30px;
+  --h2-font-size-sm: 26px;
+
   --z-tooltip: 10;
   --z-fixed: 100;
 }
 
 body {
-  background-color: var(--body-color);
-  color: var(--text-color);
+  background: linear-gradient(to bottom, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3)) no-repeat fixed;
+  height: 100%;
+  background-size: cover;
+  color: var(--3-color);
   font-family: var(--body-font);
 }
 
@@ -33,4 +52,30 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+textarea:focus, input:focus
+{
+  outline: none;
+}
+
+.input__btn {
+  padding: 20px;
+  margin: 0 auto;
+  height: 60px;
+  width: fit-content;
+  text-align: center;
+
+  font-weight: bold;
+  color: var(--3-color);
+  white-space: nowrap;
+
+  border: var(--3-color) solid 2px;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out 0s, color 0.3s ease-in-out 0s, background-color 0.3s ease-in-out 0s;
+}
+.input__btn:hover {
+  border-color: var(--3-color);
+  color: var(--2-color);
+  background-color: var(--3-color);
 }

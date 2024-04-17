@@ -23,8 +23,8 @@ export default App;
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar/Navbar";
 //
-// import Home from "./pages/Home";
-// import News from "./pages/News";
+// import ComponentSearch from "./pages/ComponentSearch";
+// import Comparison from "./pages/Comparison";
 //
 // const App = () => {
 //   return (
@@ -32,8 +32,8 @@ export default App;
 //         <Navbar />
 //         <main className="main-content">
 //           <Routes>
-//             <Route path="/" element={<Home />} />
-//             <Route path="/news" element={<News />} />
+//             <Route path="/" element={<ComponentSearch />} />
+//             <Route path="/news" element={<Comparison />} />
 //             {/* Define other routes that you need*/}
 //           </Routes>
 //         </main>
