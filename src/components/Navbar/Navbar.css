@@ -9,11 +9,6 @@
     z-index: var(--z-fixed);
 }
 
-.header.active {
-    background-color: var(--2-color);
-    border-bottom: var(--bg-color-3) 1px solid;
-}
-
 .nav {
     display: flex;
     align-items: center;
@@ -156,6 +151,17 @@
     transition: right 0.4s;
 }
 @media screen and (min-width: 1150px) {
+    .header {
+        transition: background-color ease-in-out 0.6s;
+        -webkit-transition: ease-in-out 0.6s;
+    }
+
+    .header.active {
+        background-color: var(--bg-color-nav);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
     .nav {
         height: calc(var(--header-height) + 1rem);
         /*background-color: hsla(0, 0%, 6%, 0.2);*/

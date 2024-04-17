@@ -3,6 +3,7 @@ import "./App.css";
 import {BrowserRouter} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AppRouter from "./components/AppRouter";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
 
@@ -12,6 +13,7 @@ const App = () => {
             <main className={"main-content"}>
                 <AppRouter/>
             </main>
+            <Footer/>
         </BrowserRouter>
     );
 }
