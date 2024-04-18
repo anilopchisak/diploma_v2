@@ -1,0 +1,22 @@
+.wrapper__instruction {
+    font-family: var(--second-font);
+    font-size: var(--font-size-md);
+    margin-left: 50px;
+    padding: 25px 50px 25px 0;
+    color: var(--2-color);
+    line-height: 25px;
+}
+.name__instruction {
+    padding-bottom: 30px;
+}
+.list__instruction__name {
+    padding-bottom: 10px;
+}
+.list__instruction__item {
+    padding-bottom: 20px;
+}
+
+mark {
+    color: var(--2-color);
+    background-color: var(--3-color);
+}
