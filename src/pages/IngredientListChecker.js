@@ -1,10 +1,10 @@
 import React from 'react';
-import TextInput from "../components/IngredientListChecker/TextInput";
+import IngredientListInput from "../components/IngredientListChecker/IngredientListInput";
 
 const IngredientListChecker = () => {
     return (
         <div>
-            <TextInput/>
+            <IngredientListInput/>
         </div>
     );
 };

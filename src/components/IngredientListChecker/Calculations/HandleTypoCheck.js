@@ -15,7 +15,7 @@ const jsonData = [
     { id: 10, name: 'метилизотиазолинон' },
 ]
 
-const TypoCheck = (inputString) => {
+const HandleTypoCheck = (inputString) => {
 
     if (typeof inputString === "undefined")
     {
@@ -57,4 +57,4 @@ const TypoCheck = (inputString) => {
 
 }
 
-export default TypoCheck;
+export default HandleTypoCheck;

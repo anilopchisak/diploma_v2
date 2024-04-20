@@ -1,6 +1,6 @@
-import TypoCheck from "./TypoCheck";
+import HandleTypoCheck from "./HandleTypoCheck";
 
-const Normalization = (selectedText) => {
+const HandleNormalization = (selectedText) => {
 
     let normText;
     normText = selectedText;
@@ -17,13 +17,13 @@ const Normalization = (selectedText) => {
         normText[i] = normText[i].replace(/\(.+\)/,''); // ( )
         normText[i] = normText[i].replace(/\./g, ''); // points
         normText[i] = normText[i].replace(/\s+/g, ' ').trim(); // spaces
-        normText[i] = TypoCheck(normText[i]);
+        normText[i] = HandleTypoCheck(normText[i]);
     }
 
     console.log(normText);
 
     return(normText);
-    // return(TypoCheck(normText));
+    // return(HandleTypoCheck(normText));
 }
 
-export default Normalization;
+export default HandleNormalization;

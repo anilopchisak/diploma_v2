@@ -20,24 +20,29 @@
 }
 
 .input__field {
-    padding: 25px 0 25px 50px;
+    padding: 25px 0 25px 60px;
 
     /*display: flex;*/
     /*justify-content: center;*/
 }
 
-.input__field textarea {
-    padding: 5px 10px;
-    width: 700px;
-    height: 400px;
-    resize: none;
-    font-family: var(--second-font);
-    font-size: var(--font-size-lg);
-    background-color: var(--2-color);
-    border-color: var(--bg-color-nav);
-}
+/*.input__field textarea {*/
+/*    padding: 5px 10px;*/
+/*    width: 700px;*/
+/*    height: 400px;*/
+/*    resize: none;*/
+/*    font-family: var(--second-font);*/
+/*    font-size: var(--font-size-lg);*/
+/*    background-color: var(--2-color);*/
+/*    border-color: var(--bg-color-nav);*/
+/*}*/
 
 .link {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.wrapper__input2 {
+    margin-left: 50px;
+    padding: 25px 50px 25px 0;
 }

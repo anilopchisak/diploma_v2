@@ -1,0 +1,47 @@
+.file__upload {
+    /*padding: 5px 10px;*/
+    width: 700px;
+    height: 400px;
+    border: var(--1-color) 2px dashed;
+    border-radius: 15px;
+
+    font-family: var(--second-font);
+    font-size: var(--h2-font-size-lg);
+    color: var(--2-color);
+    line-height: 25px;
+}
+
+.dnd-area {
+    flex-direction: column;
+    height: 100%;
+    border-radius: 15px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+.dnd-area p {
+    margin-left: 5px;
+    color: var(--3-color);
+    text-decoration: underline;
+}
+#drag-accept {
+    background-color: rgba(6, 210, 91, 0.2);
+}
+#drag-reject {
+    background-color: rgba(222, 28, 28, 0.2);
+}
+#file-req {
+    margin-top: 15px;
+    font-size: var(--font-size-lg);
+    color: var(--3-color);
+}
+
+.warning-sign {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,10 @@
+.textarea_input {
+    padding: 5px 10px;
+    width: 700px;
+    height: 400px;
+    resize: none;
+    font-family: var(--second-font);
+    font-size: var(--font-size-lg);
+    background-color: var(--2-color);
+    border-color: var(--bg-color-nav);
+}

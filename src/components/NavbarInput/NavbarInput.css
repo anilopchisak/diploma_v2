@@ -1,6 +1,6 @@
 .navbarInput__container {
     height: 450px;
-    padding: 105px 0;
+    padding: 145px 0;
     width: 50px;
     background-color: var(--bg-color-nav);
     backdrop-filter: blur(16px);
