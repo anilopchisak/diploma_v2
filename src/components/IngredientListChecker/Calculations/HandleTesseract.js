@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Tesseract from 'tesseract.js';
 
-const HandleTesseract = () => {
-    return (
-        <div>
+const HandleTesseract = ({image}) => {
+    const [recText, setRecText] = useState('');
 
-        </div>
-    );
+
+
+    return (recText);
 };
 
 export default HandleTesseract;

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
+
+import { PiList, PiX } from "react-icons/pi";
 
 import {
     COMP_SEARCH_ROUTE,
@@ -79,12 +80,12 @@ const Navbar = () => {
                     </ul>
 
                     <div className="nav__close" id="nav-close" onClick={toggleMenu}>
-                        <IoClose />
+                        <PiX />
                     </div>
                 </div>
 
                 <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
-                    <IoMenu />
+                    <PiList />
                 </div>
             </nav>
         </header>

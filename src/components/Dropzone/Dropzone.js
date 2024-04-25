@@ -1,20 +1,33 @@
-import React, {useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone'
 import './Dropzone.css'
-import IngredientListInput from "../IngredientListChecker/IngredientListInput";
 
 import { PiWarningCircle } from "react-icons/pi";
 
-const Dropzone = (set_typeInput) => {
-    const [file, setFile] = useState();
+const Dropzone = ({setImage}) => {
+    // const [image, setImage] = useState(null);
 
-    const onDrop = useCallback(acceptedFiles => {
-        setFile(acceptedFiles);
+    const onDrop = (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
 
-        set_typeInput('edit');
+        reader.onload = () => {
+            setImage(reader.result);
+        };
 
-        // console.log(acceptedFiles);
-        }, []);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
+
+    // useState - это асинхронная операция, и изменения состояния не отражаются немедленно.
+    // стоит использовать useEffect, чтобы реагировать на изменения состояния image
+    // useEffect(() => {
+    //     if (image !== null) {
+    //         setImage(image);
+    //         // set_typeInput('edit');
+    //     }
+    // }, [image]);
 
     const {
         getRootProps,
@@ -25,15 +38,12 @@ const Dropzone = (set_typeInput) => {
     } = useDropzone(
         {
             onDrop,
-            accept: {'image/*': [] },
+            accept: {'image/*': []},
             maxFiles: 1,
-            maxSize: 5242880
+            maxSize: 5242880,
+            multiple: false
         }
     );
-
-    const handleSubmit = () => {
-
-    }
 
     return (
         <div className={'file__upload'} {...getRootProps()}>
@@ -55,15 +65,6 @@ const Dropzone = (set_typeInput) => {
                         Невозможно загрузить файл: только .jpg, .jpeg, .png размером до 5Мб
                 </div>
             }
-            {/*{*/}
-            {/*    isDragActive ?*/}
-            {/*        <div className={"dnd-area"} id={"drag"}>*/}
-            {/*            .jpg, .jpeg, .png размером до 5Мб*/}
-            {/*        </div> :*/}
-            {/*        <div className={"dnd-area"}>*/}
-            {/*            Перетащите изображение сюда или <p>выберите вручную</p>*/}
-            {/*        </div>*/}
-            {/*}*/}
         </div>
     );
 };

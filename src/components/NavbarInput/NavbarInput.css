@@ -1,6 +1,5 @@
 .navbarInput__container {
-    height: 450px;
-    padding: 145px 0;
+    height: 550px;
     width: 50px;
     background-color: var(--bg-color-nav);
     backdrop-filter: blur(16px);
@@ -8,6 +7,7 @@
     transition: width 0.5s ease;
     overflow: hidden;
     position: absolute;
+    z-index: 1000;
 }
 .navbarInput__container:hover {
     width: 410px;
@@ -19,6 +19,7 @@
 .navInput__menu {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100%
 }
 

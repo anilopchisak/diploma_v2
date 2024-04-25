@@ -1,0 +1,132 @@
+.file__edit {
+    /*padding: 5px 10px;*/
+
+    font-family: var(--second-font);
+    font-size: var(--h2-font-size-lg);
+    color: var(--2-color);
+    line-height: 25px;
+}
+
+.edit__place {
+    width: 680px;
+    height: 420px;
+    position: relative;
+}
+
+.img-cropper {
+    height: 360px;
+}
+
+.edit__nav {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.edit__nav div {
+    align-items: center;
+}
+.edit__nav__input {
+    display: flex;
+}
+
+.wrapper__input__range {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper__input__range:last-child {
+    margin: 0;
+}
+
+.wrapper__input__range div {
+    margin-right: 15px;
+    color: var(--1-color);
+}
+
+.input__range {
+    -webkit-appearance: none; /* Убираем стандартные стили вебкит-браузеров */
+    appearance: none; /* Убираем стандартные стили в других браузерах */
+
+    width: 300px;
+    height: 2px;
+    border-radius: 5px;
+
+    background: var(--1-color);
+    outline: none; /* Убираем контур фокуса */
+}
+.input__range:active,
+.input__range:focus {
+    outline: none; /* Убираем контур фокуса */
+}
+.input__range::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #470447;
+    cursor: pointer;
+}
+/*стили для ползунка*/
+.input__range::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Убираем стандартные стили вебкит-браузеров */
+    appearance: none; /* Убираем стандартные стили в других браузерах */
+    width: 16px; /* Ширина ползунка */
+    height: 16px; /* Высота ползунка */
+    background: var(--1-color);
+    border-radius: 50px; /* Радиус скругления углов ползунка */
+    cursor: pointer;
+    margin-top: -3px; /* Смещение ползунка по вертикали */
+    transition: background 0.3s ease-in-out;
+}
+.input__range::-webkit-slider-thumb:hover {
+    background: var(--2-color);
+}
+
+.wrapper__input__dropdown {
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.input__dropdown {
+    border: none;
+    appearance: none;
+    outline: none;
+
+    width: 70px;
+    padding: 5px 0 5px 10px;
+
+    background-color: var(--1-color);
+
+    font-family: var(--third-font);
+    font-size: var(--font-size-lg);
+    color: var(--2-color);
+
+    cursor: pointer;
+    /*text-align: center;*/
+}
+
+.input__dropdown__icon {
+    position: absolute;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+
+.edit__nav__icons {
+    height: 30px;
+    width: auto;
+    color: var(--1-color);
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+.edit__nav__icons:hover {
+    color: var(--2-color);
+}
