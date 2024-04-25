@@ -1,6 +1,4 @@
 .file__edit {
-    /*padding: 5px 10px;*/
-
     font-family: var(--second-font);
     font-size: var(--h2-font-size-lg);
     color: var(--2-color);
@@ -97,7 +95,7 @@
     appearance: none;
     outline: none;
 
-    width: 70px;
+    width: 100px;
     padding: 5px 0 5px 10px;
 
     background-color: var(--1-color);
@@ -107,7 +105,6 @@
     color: var(--2-color);
 
     cursor: pointer;
-    /*text-align: center;*/
 }
 
 .input__dropdown__icon {

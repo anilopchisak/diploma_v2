@@ -3,14 +3,28 @@ import ReactEasyCrop from 'react-easy-crop';
 import './ImageEdit.css'
 
 import { PiCheck, PiX, PiArrowClockwise, PiArrowsOut, PiCaretDown } from "react-icons/pi";
+import HandleTesseract from "../IngredientListChecker/Calculations/HandleTesseract";
 
 const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [rotation, setRotation] = useState(0)
-    const [aspect, setAspect] = useState(1/1);
+    const [aspect, setAspect] = useState(null);
+    const [customAspect, setCustomAspect] = useState(null);
 
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+    // Вычисление соотношения сторон изображения
+    useEffect(() => {
+        const imageObj = new Image();
+        imageObj.src = image;
+        imageObj.onload = () => {
+            const { naturalWidth, naturalHeight } = imageObj;
+            const aspectRatio = naturalWidth / naturalHeight;
+            setCustomAspect(aspectRatio);
+            setAspect(aspectRatio)
+        };
+    }, [image]);
 
     const onCropChange = (crop, percentCrop) => {
         setCrop(crop);
@@ -27,6 +41,14 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
     const onAspectChange = aspect => {
         setAspect(aspect);
     }
+
+    // useEffect(() => {
+    //     if (aspect == null) {
+    //         const { naturalWidth, naturalHeight } = image;
+    //         const ratio = naturalWidth / naturalHeight;
+    //         setAspect(ratio);
+    //     }
+    // }, [aspect]);
 
     const onCropComplete = (croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
@@ -131,6 +153,7 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
                     <div className={"wrapper__input__dropdown"}>
                         <select className={"input__dropdown"}
                                 onChange={(event) => onAspectChange(parseFloat(event.target.value))}>
+                            <option value={customAspect} name={"ratio"}>custom</option>
                             <option value={1 / 1} name={"ratio"}>1:1</option>
                             <option value={5 / 4} name={"ratio"}>5:4</option>
                             <option value={4 / 3} name={"ratio"}>4:3</option>

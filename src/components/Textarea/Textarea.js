@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Textarea.css'
 
-const Textarea = ({handleNormalize}) => {
+const Textarea = ({handleNormalize, recText}) => {
     const [Text, setText] = useState(''); // введенный состав
+
+    useEffect(() => {
+        if(recText) {
+            setText(recText);
+        }
+    }, [recText]);
 
     const handleChange = (event) => {
         setText(event.target.value);

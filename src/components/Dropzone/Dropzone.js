@@ -20,15 +20,6 @@ const Dropzone = ({setImage}) => {
         }
     };
 
-    // useState - это асинхронная операция, и изменения состояния не отражаются немедленно.
-    // стоит использовать useEffect, чтобы реагировать на изменения состояния image
-    // useEffect(() => {
-    //     if (image !== null) {
-    //         setImage(image);
-    //         // set_typeInput('edit');
-    //     }
-    // }, [image]);
-
     const {
         getRootProps,
         getInputProps,

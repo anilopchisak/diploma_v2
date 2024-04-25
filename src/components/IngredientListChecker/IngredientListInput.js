@@ -20,7 +20,7 @@ const IngredientListInput = () => {
     const [croppedImage, setCroppedImage] = useState(null);
     const [recText, setRecText] = useState('');
 
-    const handleNormalize = (Text) => {
+    const handleNormalization = (Text) => {
         setNormText(HandleNormalization(Text));
         if (typeof normText === "undefined") {
             alert("Text is undefined! Check the console.log");
@@ -35,22 +35,35 @@ const IngredientListInput = () => {
     const set_image = (a) => {
         setImage(a);
     }
+
+    const set_recText = (a) => {
+        setRecText(a);
+    }
+
+    const set_CroppedImage = (a) => {
+        setCroppedImage(a);
+        setImage(null);
+    }
+
     useEffect(() => {
         if (image !== null) {
             setTypeInput('edit');
         }
     }, [image]);
 
-    const set_CroppedImage = (a) => {
-        setCroppedImage(a);
-        setImage(null);
-    }
     useEffect(() => {
-        if (croppedImage !== null) {
-            setRecText(HandleTesseract(croppedImage));
-            // setTypeInput('final');
+        if (croppedImage) {
+            setTypeInput('processing');
+            HandleTesseract({image: croppedImage, setText: set_recText});
         }
     }, [croppedImage]);
+
+    useEffect(() => {
+        if (recText) {
+            setTypeInput('final');
+            console.log(recText);
+        }
+    }, [recText]);
 
     return (
         <div className={"wrapper"}>
@@ -62,11 +75,12 @@ const IngredientListInput = () => {
                 <form className={"input__field"}>
                     {typeInput === 'img' ?
                         <Dropzone setImage={set_image}/>
-                    :
-                    typeInput === 'edit' ?
+                    : typeInput === 'edit' ?
                         <ImageEdit setTypeInput={set_typeInput} setImage={set_image} setCroppedImage={set_CroppedImage} image={image}/>
+                    : typeInput === 'processing' ?
+                        <div>Processing...</div>
                     :
-                        <Textarea handleNormalize={handleNormalize}/>
+                        <Textarea handleNormalize={handleNormalization} recText={recText}/>
                     }
                 </form>
 
