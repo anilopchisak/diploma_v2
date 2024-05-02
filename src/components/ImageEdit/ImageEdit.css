@@ -1,6 +1,6 @@
 .file__edit {
     font-family: var(--second-font);
-    font-size: var(--h2-font-size-lg);
+    font-size: var(--2-font-size);
     color: var(--2-color);
     line-height: 25px;
 }
@@ -101,7 +101,7 @@
     background-color: var(--1-color);
 
     font-family: var(--third-font);
-    font-size: var(--font-size-lg);
+    font-size: var(--1-font-size);
     color: var(--2-color);
 
     cursor: pointer;

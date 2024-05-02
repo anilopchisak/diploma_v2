@@ -3,7 +3,7 @@ import ReactEasyCrop from 'react-easy-crop';
 import './ImageEdit.css'
 
 import { PiCheck, PiX, PiArrowClockwise, PiArrowsOut, PiCaretDown } from "react-icons/pi";
-import HandleTesseract from "../IngredientListChecker/Calculations/HandleTesseract";
+import HandleTesseract from "../IngredientListChecker/Calculations/HandleTesseractProc/HandleTesseract";
 
 const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 });

@@ -1,25 +1,19 @@
 import React, {useState} from 'react';
 import Tesseract from 'tesseract.js';
 
-const HandleTesseract = async ({image, setText}) => {
-    // let recText = '';
+const HandleTesseract = async ({image, setText, setTypeInput}) => {
 
-    // try {
     const { data } = await Tesseract.recognize(
         image,
         'eng+rus'
     );
+
+    // if (data.text) {
     setText(data.text);
-    // console.log(text);
-    // return text;
-        // recText = text;
+    // } else {
+    //     setTypeInput('processing_error');
+    //     // setText('');
     // }
-
-    // catch (error) {
-    //     console.error('Error during text recognition:', error);
-    //     // recText = 'Error occurred during recognition';
-    // }
-
 }
 
 export default HandleTesseract;

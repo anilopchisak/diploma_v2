@@ -6,20 +6,22 @@
     border-radius: 15px;
 
     font-family: var(--second-font);
-    font-size: var(--h2-font-size-lg);
+    font-size: var(--2-font-size);
     color: var(--2-color);
     line-height: 25px;
 }
 
 .dnd-area {
-    flex-direction: column;
     height: 100%;
-    border-radius: 15px;
     padding: 10px 30px;
+    border-radius: 15px;
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+
     cursor: pointer;
     transition: background-color 0.3s ease-in 0s;
 }
@@ -36,7 +38,7 @@
 }
 #file-req {
     margin-top: 15px;
-    font-size: var(--font-size-lg);
+    font-size: var(--1-font-size);
     color: var(--3-color);
 }
 

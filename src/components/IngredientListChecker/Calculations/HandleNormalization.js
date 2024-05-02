@@ -5,13 +5,8 @@ const HandleNormalization = (selectedText) => {
     let normText;
     normText = selectedText;
 
-    if (typeof normText === "undefined") {
-        alert("Text is undefined! Check the console.log");
-        console.log(normText);
-        return;
-    }
-
     normText = normText.toLowerCase();
+    normText = normText.replace(/\n/g, '');
     normText = normText.split(', ');
     for (let i = 0; i < normText.length; i++) {
         normText[i] = normText[i].replace(/\(.+\)/,''); // ( )
@@ -20,10 +15,11 @@ const HandleNormalization = (selectedText) => {
         normText[i] = HandleTypoCheck(normText[i]);
     }
 
-    console.log(normText);
+    const listWithConcentrations = normText.map(ingredient => ({ ingr_name: ingredient, concentration: 0 }));
 
-    return(normText);
-    // return(HandleTypoCheck(normText));
+    // console.log(normText);
+
+    return(listWithConcentrations);
 }
 
 export default HandleNormalization;

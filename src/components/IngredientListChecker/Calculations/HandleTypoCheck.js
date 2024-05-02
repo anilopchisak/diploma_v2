@@ -16,43 +16,31 @@ const jsonData = [
 ]
 
 const HandleTypoCheck = (inputString) => {
-
-    if (typeof inputString === "undefined")
-    {
-        alert("Text is undefined! Check the console.log");
-        console.log(inputString);
-        return;
-    }
-
-    console.log('The input:' + inputString);
-
     let checkResult;
     let min = 0;
 
     for(let i = 0; i < jsonData.length; i++) {
         // Проведение сравнения с использованием Jaro-Winkler для каждого элемента
         const similarity = jaroWinkler(jsonData[i].name, inputString);
+        console.log(inputString, similarity);
         if (similarity === 1)
         {
-
             return inputString;
         }
-        else if (similarity > min)
+        else if (similarity > min && similarity > 0.8)
         {
             min = similarity;
             checkResult = jsonData[i].name;
-            console.log(min, checkResult);
         }
     }
 
-    if (checkResult)
+    if (checkResult && min > 0.9)
     {
-        // if( window.confirm("Change " + inputString + " to " + checkResult + "?"))
-        // {
-        //     return(checkResult);
-        // }
-        console.log('The result:' + checkResult);
         return checkResult;
+    }
+    else
+    {
+        return inputString;
     }
 
 }

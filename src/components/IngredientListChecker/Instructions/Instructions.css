@@ -1,6 +1,6 @@
 .wrapper__instruction {
     font-family: var(--second-font);
-    font-size: var(--h2-font-size-lg);
+    font-size: var(--2-font-size);
     color: var(--2-color);
     line-height: 25px;
 }

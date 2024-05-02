@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Textarea.css'
 
-const Textarea = ({handleNormalize, recText}) => {
+const Textarea = ({handleNormalize, recText, setTypeInput}) => {
     const [Text, setText] = useState(''); // введенный состав
 
     useEffect(() => {
@@ -12,8 +12,13 @@ const Textarea = ({handleNormalize, recText}) => {
 
     const handleChange = (event) => {
         setText(event.target.value);
-        handleNormalize(Text);
     }
+    useEffect(() => {
+        if (Text) {
+            handleNormalize(Text);
+            setTypeInput('final');
+        }
+    }, [Text]);
 
     return (
         <div>

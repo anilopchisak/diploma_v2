@@ -11,21 +11,19 @@ import Dropzone from "../Dropzone/Dropzone";
 import NavbarInput from "../NavbarInput/NavbarInput";
 import Textarea from "../Textarea/Textarea";
 import ImageEdit from "../ImageEdit/ImageEdit";
-import HandleTesseract from "./Calculations/HandleTesseract";
+import HandleTesseract from "./Calculations/HandleTesseractProc/HandleTesseract";
+import HandleTesseractProcessing from "./Calculations/HandleTesseractProc/HandleTesseractProcessing";
 
 const IngredientListInput = () => {
-    const [normText, setNormText] = useState(''); // нормализованный состав
+    const [typeInput, setTypeInput] = useState('txt'); // тип ввода: txt, img, edit, processing, final
+    const [normText, setNormText] = useState([]); // нормализованный состав (не кортежи)
     const [image, setImage] = useState(null);
-    const [typeInput, setTypeInput] = useState('img'); // тип ввода: txt, img, edit, final
     const [croppedImage, setCroppedImage] = useState(null);
     const [recText, setRecText] = useState('');
+    const [finalList, setFinalList] = useState([]);
 
     const handleNormalization = (Text) => {
         setNormText(HandleNormalization(Text));
-        if (typeof normText === "undefined") {
-            alert("Text is undefined! Check the console.log");
-            console.log(normText);
-        }
     }
 
     const set_typeInput = (a) => {
@@ -45,23 +43,39 @@ const IngredientListInput = () => {
         setImage(null);
     }
 
+    const set_finalList = (a) => {
+        setFinalList(a);
+    }
+
     useEffect(() => {
-        if (image !== null) {
+        if (finalList) {
+            console.log(finalList);
+        }
+    }, [finalList]);
+
+    // когда изображение загружено, включается режит редактирования изображения
+    useEffect(() => {
+        if (image) {
             setTypeInput('edit');
         }
     }, [image]);
 
+    // когда изображение обрезано, распознается текст на изображении
     useEffect(() => {
         if (croppedImage) {
             setTypeInput('processing');
-            HandleTesseract({image: croppedImage, setText: set_recText});
+            HandleTesseract({image: croppedImage, setText: set_recText, setTypeInput: set_typeInput});
         }
     }, [croppedImage]);
 
+    // если текст на изображении распознан, включается режим ввода концентраций
     useEffect(() => {
-        if (recText) {
+        if (recText !== '') {
+            // console.log(recText);
+            setRecText(recText.replace(/\n/g, ''));
+            // console.log(recText);
+            setNormText(HandleNormalization(recText));
             setTypeInput('final');
-            console.log(recText);
         }
     }, [recText]);
 
@@ -72,21 +86,23 @@ const IngredientListInput = () => {
             <div className={"wrapper__input"}>
                 <NavbarInput setTypeInput={set_typeInput}/>
 
-                <form className={"input__field"}>
+                <div className={"input__field"}>
                     {typeInput === 'img' ?
                         <Dropzone setImage={set_image}/>
                     : typeInput === 'edit' ?
                         <ImageEdit setTypeInput={set_typeInput} setImage={set_image} setCroppedImage={set_CroppedImage} image={image}/>
                     : typeInput === 'processing' ?
-                        <div>Processing...</div>
+                        <HandleTesseractProcessing typeInput={typeInput}/>
+                    : typeInput === 'processing_error' ?
+                        <HandleTesseractProcessing typeInput={typeInput}/>
                     :
-                        <Textarea handleNormalize={handleNormalization} recText={recText}/>
+                        <Textarea handleNormalize={handleNormalization} recText={recText} setTypeInput={set_typeInput}/>
                     }
-                </form>
+                </div>
 
                 <div className={"wrapper__input2"}>
                     {typeInput === 'final' ?
-                        <Concentrations normText={normText}/>
+                        <Concentrations normText={normText} setFinalList={set_finalList}/>
                         :
                         <Instructions typeInput={typeInput}/>
                     }

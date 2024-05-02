@@ -12,40 +12,61 @@
   --header-height: 3.5rem;
 
   --1-color: black;
-  --2-color: #fffdfe; /*title*/
-  --3-color: #470447; /*text*/
-  /*--4h-color: hsl(0, 0%, 100%); !*body*!*/
+  --2-color: #fffdfe;
+  --3-color: #470447;
+
   --bg-color-1: #fff4e7;
   --bg-color-2: #e9cfd9;
   --bg-color-3: #a098bf;
   --bg-color-nav: hsla(0, 0%, 6%, 0.2);
 
-  --body-font: "Comfortaa", sans-serif;
+  --first-font: "Comfortaa", sans-serif;
   --second-font: "Raleway", sans-serif;
   --third-font: "Jost", sans-serif;
 
-  --font-size-lg: 18px;
-  --h1-font-size-lg: 26px;
-  --h2-font-size-lg: 22px;
-
-  --font-size-md: 20px;
-  --h1-font-size-md: 28px;
-  --h2-font-size-md: 24px;
-
-  --font-size-sm: 22px;
-  --h1-font-size-sm: 30px;
-  --h2-font-size-sm: 26px;
-
-  --z-tooltip: 10;
-  --z-fixed: 100;
+  --z-fixed: 10000;
 }
 
+@media screen and (max-width: 480px) {
+  :root {
+    --1-font-size: 20px;
+    --2-font-size: 24px;
+    --3-font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --1-font-size: 16px;
+    --2-font-size: 20px;
+    --3-font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :root {
+    --1-font-size: 18px;
+    --2-font-size: 22px;
+    --3-font-size: 26px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  :root {
+    --1-font-size: 20px;
+    --2-font-size: 24px;
+    --3-font-size: 28px;
+  }
+}
+
+
 body {
-  background: linear-gradient(to bottom, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3)) no-repeat fixed;
   height: 100%;
+  background: linear-gradient(to bottom, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3)) no-repeat fixed;
   background-size: cover;
   color: var(--3-color);
-  font-family: var(--body-font);
+  font-family: var(--first-font);
+  font-size: var(--1-font-size);
 }
 
 ul {
