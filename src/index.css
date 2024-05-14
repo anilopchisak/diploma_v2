@@ -2,6 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+/*@media screen and (max-width: 480px) {*/
+/*}*/
+
+/*@media screen and (max-width: 768px) {*/
+/*}*/
+
+/*@media screen and (min-width: 1000px) {*/
+/*}*/
+
+/*@media screen and (min-width: 1200px) {*/
+/*}*/
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -24,14 +36,18 @@
   --second-font: "Raleway", sans-serif;
   --third-font: "Jost", sans-serif;
 
+  --1-font-size: 18px;
+  --2-font-size: 22px;
+  --3-font-size: 26px;
+
   --z-fixed: 10000;
 }
 
 @media screen and (max-width: 480px) {
   :root {
-    --1-font-size: 20px;
-    --2-font-size: 24px;
-    --3-font-size: 28px;
+    --1-font-size: 14px;
+    --2-font-size: 18px;
+    --3-font-size: 22px;
   }
 }
 
@@ -43,7 +59,7 @@
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (max-width: 992px) {
   :root {
     --1-font-size: 18px;
     --2-font-size: 22px;
@@ -51,7 +67,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1200px) {
   :root {
     --1-font-size: 20px;
     --2-font-size: 24px;
@@ -90,9 +106,12 @@ textarea:focus, input:focus
   text-align: center;
 
   font-weight: bold;
+  font-family: var(--first-font);
+  font-size: var(--1-font-size);
   color: var(--3-color);
   white-space: nowrap;
 
+  background-color: transparent;
   border: var(--3-color) solid 2px;
   cursor: pointer;
   transition: border 0.3s ease-in-out 0s, color 0.3s ease-in-out 0s, background-color 0.3s ease-in-out 0s;
@@ -101,4 +120,8 @@ textarea:focus, input:focus
   border-color: var(--3-color);
   color: var(--2-color);
   background-color: var(--3-color);
+}
+
+label {
+  margin-right: 10px;
 }

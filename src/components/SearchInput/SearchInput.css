@@ -1,0 +1,20 @@
+.search__input__place {
+    /*width: 50%;*/
+    align-items: center;
+    text-align: center;
+}
+
+.serach__input__place input {
+    width: 60rem;
+    height: 35px;
+    padding: 0 5px;
+
+    background-color: var(--2-color);
+
+    border-color: var(--bg-color-nav);
+    border-radius: 5px;
+
+    font-family: var(--third-font);
+    font-size: var(--2-font-size);
+    color: var(--1-color);
+}

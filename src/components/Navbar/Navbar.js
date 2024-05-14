@@ -34,7 +34,7 @@ const Navbar = () => {
         setShowMenu(!showMenu);
     };
     const closeMenuOnMobile = () => {
-        if (window.innerWidth <= 1150) {
+        if (window.innerWidth <= 992) {
             setShowMenu(false);
         }
     };
@@ -52,41 +52,55 @@ const Navbar = () => {
 
     return (
         <header className={navbar ? 'header active' : 'header'}>
-            <nav className="nav container">
+            <nav className="nav">
                 <NavLink to="/" className="nav__logo">
                     S K I N T E L L E C T
                 </NavLink>
 
                 <div className={`nav__menu ${showMenu ? "show-menu" : ""}`} id="nav-menu">
                     <ul className="nav__list">
-                        <MenuItem to={IL_CHECK_ROUTE} text={"Анализ состава"}
-                                    class_name={"nav__link"} on_click={closeMenuOnMobile}></MenuItem>
-                        <MenuItem to={COMPARE_ROUTE} text={"Сравнение составов"}
-                                  class_name={"nav__link"} on_click={closeMenuOnMobile}></MenuItem>
-                        <MenuItem to={COMP_SEARCH_ROUTE} text={"Поиск компонента"}
-                                  class_name={"nav__link"} on_click={closeMenuOnMobile}></MenuItem>
+                        <MenuItem
+                            to={IL_CHECK_ROUTE}
+                            text={"Анализ состава"}
+                            class_name={"nav__link"}
+                            on_click={closeMenuOnMobile}></MenuItem>
+                        <MenuItem
+                            to={COMPARE_ROUTE}
+                            text={"Сравнение составов"}
+                            class_name={"nav__link"}
+                            on_click={closeMenuOnMobile}></MenuItem>
+                        <MenuItem
+                            to={COMP_SEARCH_ROUTE}
+                            text={"Поиск компонента"}
+                            class_name={"nav__link"}
+                            on_click={closeMenuOnMobile}></MenuItem>
 
                         {(user.isAuth) ?
-                            <MenuItem to={PROFILE_ROUTE} text={"Мой профиль"}
-                                      class_name={"nav__link nav__cta"}></MenuItem>
+                            <MenuItem
+                                to={PROFILE_ROUTE}
+                                text={"Мой профиль"}
+                                class_name={"input__btn"}></MenuItem>
                             :
                             <>
-                                <MenuItem to={REG_ROUTE} text={"Регистрация"}
-                                          class_name={"nav__link"} on_click={closeMenuOnMobile}></MenuItem>
-                                <MenuItem to={LOGIN_ROUTE} text={"Войти"}
-                                          class_name={"nav__cta nav__btn"}></MenuItem>
+                                {/*<MenuItem*/}
+                                {/*    to={REG_ROUTE}*/}
+                                {/*    text={"Регистрация"}*/}
+                                {/*    class_name={"nav__link"}*/}
+                                {/*    on_click={closeMenuOnMobile}></MenuItem>*/}
+                                {/*<MenuItem to={LOGIN_ROUTE} text={"Войти"}*/}
+                                {/*          class_name={"nav__cta nav__btn"}></MenuItem>*/}
+                                <MenuItem
+                                    to={LOGIN_ROUTE}
+                                    text={"Войти"}
+                                    class_name={"input__btn"}></MenuItem>
                             </>
                         }
                     </ul>
 
-                    <div className="nav__close" id="nav-close" onClick={toggleMenu}>
-                        <PiX />
-                    </div>
+                    <div className="nav__close" onClick={toggleMenu}><PiX /></div>
                 </div>
 
-                <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
-                    <PiList />
-                </div>
+                <div className="nav__toggle" onClick={toggleMenu}><PiList /></div>
             </nav>
         </header>
     );

@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import "./App.css";
 import {BrowserRouter} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AppRouter from "./components/AppRouter";
 import Footer from "./components/Footer/Footer";
+import {Context} from "./index";
+import {observer} from "mobx-react-lite";
 
-const App = () => {
+const App = observer (() => {
+
+    const {store} = useContext(Context);
+
+    useEffect( () => {
+        if (localStorage.getItem('token')) {
+            store.checkAuth();
+        }
+    }, []);
 
     return (
         <BrowserRouter>
@@ -16,7 +26,7 @@ const App = () => {
             <Footer/>
         </BrowserRouter>
     );
-}
+});
 
 export default App;
 

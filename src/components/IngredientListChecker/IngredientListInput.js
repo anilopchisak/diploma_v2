@@ -1,33 +1,41 @@
 import React, {useEffect, useState} from "react";
 import "./IngredientListInput.css";
 
-import { PiArrowsClockwise } from "react-icons/pi"; // сбросить все
+// import { PiArrowsClockwise } from "react-icons/pi"; // сбросить все
 
 import HandleNormalization from "./Calculations/HandleNormalization";
 import Instructions from "./Instructions/Instructions"
 import Concentrations from "./Concentrations/Concentrations";
 
 import Dropzone from "../Dropzone/Dropzone";
-import NavbarInput from "../NavbarInput/NavbarInput";
+import NavbarInput from "./NavbarInput/NavbarInput";
 import Textarea from "../Textarea/Textarea";
 import ImageEdit from "../ImageEdit/ImageEdit";
 import HandleTesseract from "./Calculations/HandleTesseractProc/HandleTesseract";
 import HandleTesseractProcessing from "./Calculations/HandleTesseractProc/HandleTesseractProcessing";
 
-const IngredientListInput = () => {
-    const [typeInput, setTypeInput] = useState('txt'); // тип ввода: txt, img, edit, processing, final
-    const [normText, setNormText] = useState([]); // нормализованный состав (не кортежи)
-    const [image, setImage] = useState(null);
-    const [croppedImage, setCroppedImage] = useState(null);
-    const [recText, setRecText] = useState('');
-    const [finalList, setFinalList] = useState([]);
+const IngredientListInput = ({set_ingrList}) => {
+    // тип ввода: txt, img, edit, processing, final - для навигации этапов ввода данных
+    const [typeInput, setTypeInput] = useState('txt');
+    // нормализованный состав (не кортежи) после Textarea
+    const [normText, setNormText] = useState([]);
 
-    const handleNormalization = (Text) => {
-        setNormText(HandleNormalization(Text));
-    }
+    // входное изображение
+    const [image, setImage] = useState(null);
+    // обрезанное изображение после ImageEdit
+    const [croppedImage, setCroppedImage] = useState(null);
+    // распознанный текст
+    const [recText, setRecText] = useState('');
+
+    // список ингредиент + концентрация
+    const [finalList, setFinalList] = useState([]);
 
     const set_typeInput = (a) => {
         setTypeInput(a);
+    }
+    // set_normText
+    const handleNormalization = (Text) => {
+        setNormText(HandleNormalization(Text));
     }
 
     const set_image = (a) => {
@@ -36,6 +44,7 @@ const IngredientListInput = () => {
 
     const set_recText = (a) => {
         setRecText(a);
+        setNormText(HandleNormalization(a));
     }
 
     const set_CroppedImage = (a) => {
@@ -44,14 +53,21 @@ const IngredientListInput = () => {
     }
 
     const set_finalList = (a) => {
-        setFinalList(a);
+        // setFinalList(a);
+        setNormText(a);
     }
 
+    // useEffect(() => {
+    //     if (finalList) {
+    //         set_ingrList(finalList);
+    //     }
+    // }, [finalList]);
+
     useEffect(() => {
-        if (finalList) {
-            console.log(finalList);
+        if (normText) {
+            set_ingrList(normText);
         }
-    }, [finalList]);
+    }, [normText]);
 
     // когда изображение загружено, включается режит редактирования изображения
     useEffect(() => {
@@ -72,7 +88,7 @@ const IngredientListInput = () => {
     useEffect(() => {
         if (recText !== '') {
             // console.log(recText);
-            setRecText(recText.replace(/\n/g, ''));
+            setRecText(recText.replace(/\s+/g, ' '));
             // console.log(recText);
             setNormText(HandleNormalization(recText));
             setTypeInput('final');
@@ -81,8 +97,6 @@ const IngredientListInput = () => {
 
     return (
         <div className={"wrapper"}>
-            <div className={'input__name'}><h3>АНАЛИЗ СОСТАВА</h3></div>
-
             <div className={"wrapper__input"}>
                 <NavbarInput setTypeInput={set_typeInput}/>
 
@@ -107,11 +121,6 @@ const IngredientListInput = () => {
                         <Instructions typeInput={typeInput}/>
                     }
                 </div>
-            </div>
-
-            <div className={"input__btn"}>
-                <a>
-                    Проверить состав</a>
             </div>
 
         </div>

@@ -1,0 +1,18 @@
+.settings__wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color-nav);
+    margin-top: 10px;
+    padding: 20px 0;
+}
+#settings {
+    text-align: center;
+    margin-top: 10px;
+}
+.settings__input__name {
+    margin-bottom: 10px;
+}
+
+.settings__input {
+    margin-bottom: 30px;
+}

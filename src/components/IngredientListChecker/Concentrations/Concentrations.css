@@ -31,9 +31,12 @@
     padding-left: 10px;
 }
 .conc__item__input input {
-    width: 50px;
+    width: 80px;
     height: 30px;
     padding: 0 5px;
+
+    background-color: var(--2-color);
+    border-color: var(--bg-color-nav);
 
     font-family: var(--third-font);
     font-size: var(--2-font-size);

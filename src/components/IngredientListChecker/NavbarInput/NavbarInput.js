@@ -19,19 +19,7 @@ const NavbarInput = ({setTypeInput}) => {
                         <PiImage className={"linkInput__img"}/>
                         <div className={"linkInput__text"}>Анализировать фото с устройства</div>
                     </a>
-                    {/*<Tooltip className={"img__tooltip"} anchorSelect=".img__browse" place="right">*/}
-                    {/*    Загрузить фото с устройства*/}
-                    {/*</Tooltip>*/}
                 </li>
-                {/*<li className={"navInput__item"}>*/}
-                {/*    <a className={"navInput__link"}>*/}
-                {/*        <PiCamera className={"linkInput__img"}/>*/}
-                {/*        <div className={"linkInput__text"}>Анализировать фото с камеры</div>*/}
-                {/*    </a>*/}
-                {/*    /!*<Tooltip className={"img__tooltip"} anchorSelect=".img__photo" place="right">*!/*/}
-                {/*    /!*    Сфотографировать состав*!/*/}
-                {/*    /!*</Tooltip>*!/*/}
-                {/*</li>*/}
             </ul>
         </div>
     );

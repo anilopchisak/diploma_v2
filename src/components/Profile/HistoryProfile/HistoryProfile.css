@@ -1,0 +1,29 @@
+.history__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 70px;
+    transition: background-color 0.3s ease-in-out;
+}
+.history__item:hover {
+    background-color: var(--bg-color-nav);
+}
+
+.history__item div {
+    padding: 20px 20px;
+    cursor: default;
+    font-family: var(--third-font);
+    font-size: var(--2-font-size);
+}
+
+.icon__fav__wrapper {
+    padding: 5px;
+}
+.icon__fav {
+    font-size: var(--3-font-size);
+    transition: color 0.3s ease-in-out;
+}
+.icon__fav__wrapper:hover .icon__fav{
+    color: var(--2-color);
+}
+

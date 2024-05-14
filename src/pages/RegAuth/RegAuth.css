@@ -1,0 +1,73 @@
+.wrapper__regauth__input {
+    padding: 25px 50px 25px 50px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: var(--1-font-size);
+    /*align-items: center;*/
+}
+.regauth__card {
+
+}
+
+.input__auth__form li {
+    margin-bottom: 20px;
+}
+
+.input__auth__place {
+    width: 25vw;
+    height: 35px;
+    padding: 0 5px;
+
+    background-color: var(--2-color);
+
+    border-color: var(--bg-color-nav);
+    border-radius: 5px;
+
+    font-family: var(--third-font);
+    font-size: var(--2-font-size);
+    color: var(--1-color);
+}
+
+.input__auth__btn {
+
+}
+
+#auth__btn {
+    font-family: var(--first-font);
+    font-size: var(--1-font-size);
+    margin: 5px 0 30px 0;
+    /*color: var(--1-color);*/
+}
+
+.auth__acccheck {
+    margin-bottom: 20px;
+    line-height: 30px;
+}
+
+.navlink__auth {
+    position: relative;
+    margin-left: 7px;
+
+    font-weight: bold;
+    color: var(--2-color);
+
+    transition: underline 0.4s;
+    cursor: pointer;
+}
+.navlink__auth::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    display: block;
+    /*width: 100%;*/
+    height: 2px;
+    background: var(--2-color);
+    width: 0;
+    transition: 0.5s;
+}
+.navlink__auth:hover::after {
+    width: 100%;
+}

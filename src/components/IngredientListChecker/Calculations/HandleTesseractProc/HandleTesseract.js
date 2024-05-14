@@ -1,46 +1,28 @@
 import React, {useState} from 'react';
 import Tesseract from 'tesseract.js';
 
-const HandleTesseract = async ({image, setText, setTypeInput}) => {
+const HandleTesseract = async ({image, setText}) => {
 
-    const { data } = await Tesseract.recognize(
+    const { createWorker } = Tesseract;
+
+    const worker = await createWorker('eng+rus', 1);
+    await worker.setParameters({
+        tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789-,()/: ',
+    });
+    const { data } = await worker.recognize(
         image,
-        'eng+rus'
+        {imageColor: true, imageGrey: true, imageBinary: true}
     );
-
-    // if (data.text) {
     setText(data.text);
-    // } else {
-    //     setTypeInput('processing_error');
-    //     // setText('');
-    // }
+
+
+    // const { data } = await Tesseract.recognize(
+    //     image,
+    //     'eng+rus'
+    // );
+    // setText(data.text);
+
+
 }
 
 export default HandleTesseract;
-
-
-// import React, {useState} from 'react';
-// import { createWorker } from 'tesseract.js';
-//
-// const HandleTesseract = async ({image}) => {
-//     let recText = '';
-//
-//     try {
-//         await (async () => {
-//             const worker = await createWorker('eng');
-//             const text = await worker.recognize(image);
-//             console.log(text.data.text);
-//             recText = text.data.text;
-//             await worker.terminate();
-//         })();
-//     }
-//
-//     catch (error) {
-//         console.error('Error during text recognition:', error);
-//         recText = 'Error occurred during recognition';
-//     }
-//
-//     return recText;
-// };
-//
-// export default HandleTesseract;

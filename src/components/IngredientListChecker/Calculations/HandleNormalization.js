@@ -6,7 +6,7 @@ const HandleNormalization = (selectedText) => {
     normText = selectedText;
 
     normText = normText.toLowerCase();
-    normText = normText.replace(/\n/g, '');
+    normText = normText.replace(/\n/g, ' ');
     normText = normText.split(', ');
     for (let i = 0; i < normText.length; i++) {
         normText[i] = normText[i].replace(/\(.+\)/,''); // ( )
