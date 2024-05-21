@@ -33,12 +33,16 @@ const Comparison = () => {
     return (
         <div>
             <div className={'input__name'}><h3>СРАВНЕНИЕ СОСТАВОВ</h3></div>
+
+            <center>
+                <div className={"input__btn"}
+                     onClick={handleAnalysisRequest}>
+                    Сравнить составы
+                </div>
+            </center>
             <IngredientListInput set_ingrList={set_ingrList1}/>
             <IngredientListInput set_ingrList={set_ingrList2}/>
-            <div className={"input__btn"} onClick={handleAnalysisRequest}>
-                <a>
-                    Проверить состав</a>
-            </div>
+
         </div>
     );
 };

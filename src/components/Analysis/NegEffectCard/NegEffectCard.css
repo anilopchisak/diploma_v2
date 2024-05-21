@@ -1,0 +1,7 @@
+#neg {
+    width: 50rem;
+}
+.side_effect_item {
+    display: flex;
+    justify-content: center;
+}

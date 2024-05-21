@@ -13,6 +13,7 @@ import {
     SETTINGS_ROUTE
 } from "../../utils/consts";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 const MenuItem = ({ text, to, class_name, on_click}) => {
     return (
@@ -24,7 +25,7 @@ const MenuItem = ({ text, to, class_name, on_click}) => {
     );
 }
 
-const Navbar = () => {
+const Navbar = observer(() => {
     const {user} = useContext(Context);
 
     const [navbar, setNavbar] = useState(false);
@@ -104,6 +105,6 @@ const Navbar = () => {
             </nav>
         </header>
     );
-};
+});
 
 export default Navbar;

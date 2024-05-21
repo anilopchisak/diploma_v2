@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
-import {observer} from "mobx-react-lite";
 
 import {Context} from "../../index";
 import {LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE} from "../../utils/consts";
@@ -8,38 +7,28 @@ import {LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE} from "../../utils/consts";
 import "./RegAuth.css";
 import "../../components/IngredientListChecker/IngredientListInput.css";
 
-const RegAuth = observer (() => {
+const RegAuth = () => {
     const isLogin = window.location.pathname === LOGIN_ROUTE
     const {user} = useContext(Context);
     const navigate = useNavigate();
+
     const [login, setLogin] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    const checkData = async (login, username, email, password) => {
+    const checkData = async () => {
         try{
             if (isLogin){
-                await user.login(login, password);
-                // await user.login(login, password);
-                // await login(username, email, password);
-                // check().then(data =>{
-                //     user.setUser(true);
-                //     user.setIsAuth(true);
-                // });
-                alert("Вы успешно вошли в систему.");
+                await user.login(username, email, password);
+                navigate(PROFILE_ROUTE);
 
             } else {
-                await user.registration(username, email, password);
-                // await registration(login, password);
-                // check().then(data =>{
-                //     user.setUser(true);
-                //     user.setIsAuth(true);
-                // });
-                alert("Вы успешно зарегистрировались и вошли в систему.");
+                await user.register(username, email, password, passwordCheck);
+                alert(" Проверьте свою почту и перейдите по ссылке в отправленном вам письме для завершения регистрации.");
             }
-            navigate(PROFILE_ROUTE);
+            // navigate(PROFILE_ROUTE);
         } catch(e){
             alert(e.response.data.message);
         }
@@ -70,13 +59,35 @@ const RegAuth = observer (() => {
                         }
                         { isLogin ?
                             <ul className={"input__auth__form"}>
+                                {/*<li>*/}
+                                {/*    <input*/}
+                                {/*        type="text"*/}
+                                {/*        placeholder="Имя пользователя или email"*/}
+                                {/*        className={"input__auth__place"}*/}
+                                {/*        value={login}*/}
+                                {/*        required*/}
+                                {/*        onChange={(e) => setLogin(e.target.value)}*/}
+                                {/*    />*/}
+                                {/*</li>*/}
                                 <li>
                                     <input
                                         type="text"
-                                        placeholder="Имя пользователя или email"
-                                        className={"input__auth__place"}
+                                        placeholder="Имя пользователя"
                                         value={username}
-                                        onChange={(e) => setLogin(e.target.value)}
+                                        autoComplete="username"
+                                        className={"input__auth__place"}
+                                        required
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </li>
+                                <li>
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        className={"input__auth__place"}
+                                        required
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </li>
                                 <li>
@@ -84,7 +95,9 @@ const RegAuth = observer (() => {
                                         type="password"
                                         placeholder="Пароль"
                                         value={password}
+                                        autoComplete="current-password"
                                         className={"input__auth__place"}
+                                        required
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </li>
@@ -96,7 +109,9 @@ const RegAuth = observer (() => {
                                         type="text"
                                         placeholder="Имя пользователя"
                                         value={username}
+                                        autoComplete="username"
                                         className={"input__auth__place"}
+                                        required
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </li>
@@ -106,6 +121,7 @@ const RegAuth = observer (() => {
                                         placeholder="Email"
                                         value={email}
                                         className={"input__auth__place"}
+                                        required
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </li>
@@ -114,7 +130,9 @@ const RegAuth = observer (() => {
                                         type="password"
                                         placeholder="Пароль"
                                         value={password}
+                                        autoComplete="new-password"
                                         className={"input__auth__place"}
+                                        required
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </li>
@@ -124,13 +142,14 @@ const RegAuth = observer (() => {
                                         placeholder="Повторите пароль"
                                         value={passwordCheck}
                                         className={"input__auth__place"}
+                                        required
                                         onChange={(e) => setPasswordCheck(e.target.value)}
                                     />
                                 </li>
                             </ul>
                         }
                         <div className={"input__auth__btn"}>
-                            <button className={'input__btn'} id={"auth__btn"} onClick={checkData}>
+                            <button type={'button'} className={'input__btn'} id={"auth__btn"} onClick={checkData}>
                                 { isLogin ?
                                     'Войти'
                                     :
@@ -160,6 +179,6 @@ const RegAuth = observer (() => {
             </div>
         </div>
     );
-});
+};
 
 export default RegAuth;

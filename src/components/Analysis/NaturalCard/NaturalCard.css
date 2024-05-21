@@ -1,0 +1,9 @@
+.natural-card__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.natural__item {
+    width: 25rem;
+}

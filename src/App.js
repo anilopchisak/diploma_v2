@@ -9,11 +9,11 @@ import {observer} from "mobx-react-lite";
 
 const App = observer (() => {
 
-    const {store} = useContext(Context);
+    const {user} = useContext(Context);
 
     useEffect( () => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth();
+        if (localStorage.getItem('access')) {
+            user.isAuth = true;
         }
     }, []);
 

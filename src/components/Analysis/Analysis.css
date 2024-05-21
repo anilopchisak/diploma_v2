@@ -1,0 +1,61 @@
+.analysis__item {
+    margin: 60px 40px;
+}
+.analysis__section_name {
+    font-size: 1rem;
+}
+/*.analysis__section_name {*/
+/*    display: flex;*/
+/*    align-items: baseline;*/
+/*}*/
+.analysis__section_name p {
+    margin-left: 10px;
+    font-size: var(--2-font-size);
+}
+
+.analysis__general_info {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.general_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.general_info__item {
+    padding: 5px 20px;
+    width: 20rem;
+}
+.general_info__icon__wrapper {
+    margin: 10px;
+}
+.analysis-icon {
+    width: 3rem;
+    height: auto;
+}
+
+/*#baby {*/
+/*    position: relative;*/
+/*}*/
+/*#not {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    bottom: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    opacity: 0.7;*/
+/*}*/
+
+.recom-item {
+    display: flex;
+    align-items: center;
+
+
+    /*font-family: var(--second-font);*/
+    font-size: var(--2-font-size);
+    font-weight: bold;
+}

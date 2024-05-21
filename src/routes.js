@@ -5,7 +5,7 @@ import {
     HIST_ROUTE,
     IL_CHECK_ROUTE, LOGIN_ROUTE,
     PROFILE_ROUTE, REG_ROUTE,
-    SETTINGS_ROUTE
+    SETTINGS_ROUTE, EMAIL_CONFIRM_ROUTE, INGR_CARD_ROUTE, ANALYSIS_ROUTE
 } from "./utils/consts";
 
 import IngredientListChecker from './pages/IngredientListChecker'
@@ -13,6 +13,9 @@ import ComponentSearch from "./pages/ComponentSearch/ComponentSearch";
 import Comparison from "./pages/Comparison";
 import RegAuth from "./pages/RegAuth/RegAuth";
 import Profile from "./pages/ProfilePage/Profile";
+import EmailConfirm from "./pages/EmailConfim/EmailConfirm";
+import IngredientCard from "./pages/IngredientCard/IngredientCard";
+import AnalysisPage from "./pages/AnalysisPage/AnalysisPage";
 
 export const authRoutes = [
     {
@@ -62,5 +65,20 @@ export const publicRoutes = [
         path: REG_ROUTE,
         element: <RegAuth/>,
         title: 'Зарегистрироваться'
+    },
+    {
+        path: INGR_CARD_ROUTE + ':id',
+        element: <IngredientCard/>,
+        title: 'Ингредиент'
+    },
+    {
+        path: ANALYSIS_ROUTE,
+        element: <AnalysisPage/>,
+        title: 'Анализ состава'
+    },
+    {
+        path: EMAIL_CONFIRM_ROUTE,
+        element: <EmailConfirm/>,
+        title: 'Подтверждение email'
     },
 ]

@@ -1,15 +1,12 @@
-import React, {useContext} from 'react';
+import React, {useEffect} from 'react';
 import "./ComponentSearchItem.css"
-import {INGR_DETAIL_ROUTE} from "../../utils/consts";
-import {Context} from "../../index";
+import {INGR_CARD_ROUTE} from "../../utils/consts";
 import {useNavigate} from "react-router-dom";
 
 const ComponentSearchItem = ({ingr}) => {
-    const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate(INGR_DETAIL_ROUTE + '/' + ingr.id);
-    }
+    const navigate = useNavigate();
+    const handleClick = () => { navigate(INGR_CARD_ROUTE + ingr.id); }
 
     return (
         <div
@@ -18,7 +15,7 @@ const ComponentSearchItem = ({ingr}) => {
             className={"comp__search__item"}
         >
             <div className={"comp__search__item__name"}>
-                {ingr.name.toUpperCase()}
+                {ingr.ingr_name.toUpperCase()}
             </div>
             <div className={"comp__search__item__desc"}>{ingr.description}</div>
         </div>

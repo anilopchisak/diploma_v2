@@ -7,26 +7,16 @@ class UserStore {
     constructor() {
         this._isAuth = false;
         this._user = {};
-        this._history = [
-            { id: 1, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 2, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 3, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 4, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 5, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 6, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 7, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 8, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' }
-        ];
-        this._favs = [
-            { id: 1, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 2, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 3, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 4, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 5, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 6, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 7, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-            { id: 8, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' }
-        ];
+        this._history = [];
+        // { id: 1, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 2, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 3, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 4, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 5, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 6, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 7, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
+        // { id: 8, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' }
+        this._favs = [];
         // this._pass = {};
         // this._email = {};
         makeAutoObservable(this); // следим за изменениями переменных
@@ -45,24 +35,49 @@ class UserStore {
     setFavs(favs) {
         this._favs = favs;
     }
-    async registration(username, email, pass) {
+    async register(username, email, pass, pass2) {
         try {
-            const response = await registration(username, email, pass);
+            const response = await registration(username, email, pass, pass2);
             console.log(response);
-            localStorage.setItem('token', response.accessToken); // Используем accessToken
-            this.setIsAuth(true);
-            this.setUser(response.user);
+            // localStorage.setItem('token', response.access); // Используем accessToken
+            // this.setIsAuth(true);
+            // this.setUser(response.user);
         } catch (e) {
             console.log(e.response?.data?.message);
         }
     }
-    async login(log, pass) {
+    // async login(log, pass) {
+    //     try {
+    //         const response = await login(log, pass);
+    //         console.log(response);
+    //         localStorage.setItem('token', response.access); // Используем accessToken
+    //         this.setIsAuth(true);
+    //         this.setUser(response.user);
+    //     } catch (e) {
+    //         console.log(e.response?.data?.message);
+    //     }
+    // }
+
+    async checkAuth() {
         try {
-            const response = await login(log, pass);
+            const response = await check(); // Вызываем функцию logout из userAPI.js
             console.log(response);
-            localStorage.setItem('token', response.accessToken); // Используем accessToken
+            localStorage.setItem('token', response.access); // Используем accessToken
             this.setIsAuth(true);
             this.setUser(response.user);
+
+        } catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+    async login(username, email, pass) {
+        try {
+            const response = await login(username, email, pass);
+            console.log(response);
+            // localStorage.setItem('token', response.access); // Используем accessToken
+            this.setIsAuth(true);
+            this.setUser(response.user);
+
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -73,19 +88,6 @@ class UserStore {
             localStorage.removeItem('token');
             this.setIsAuth(false);
             this.setUser({});
-        } catch (e) {
-            console.log(e.response?.data?.message);
-        }
-    }
-
-    async checkAuth() {
-        try {
-            const response = await check(); // Вызываем функцию logout из userAPI.js
-            console.log(response);
-            localStorage.setItem('token', response.accessToken); // Используем accessToken
-            this.setIsAuth(true);
-            this.setUser(response.user);
-
         } catch (e) {
             console.log(e.response?.data?.message);
         }

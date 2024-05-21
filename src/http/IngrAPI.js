@@ -1,7 +1,18 @@
 import {$host} from "./index";
-import jwt_decode from "jwt-decode";
 
-export const fetchIngrs = async () => {
-    const {data} = await $host.get('ingredient')
-    return data
+export const fetchIngrNames = async () => {
+    const {data} = await $host.get('http://localhost:8000/all_ingr_names/');
+    console.log(data);
+    return data;
+}
+
+// export const fetchIngrs = async () => {
+//     const {data} = await $host.get('http://localhost:8000/all_ingr_names/');
+//     console.log(data);
+//     return data;
+// }
+
+export const fetchOneIngr = async (id) => {
+    const {data} = await $host.get('http://localhost:8000/ingr/' + id);
+    return data;
 }

@@ -1,0 +1,13 @@
+.comb-item {
+    background-color: var(--bg-color-nav);
+    padding: 15px;
+    margin-bottom: 3px;
+}
+
+.comb-name {
+    color: white;
+    font-family: var(--second-font);
+    font-weight: bold;
+    font-size: var(--2-font-size);
+    margin-bottom: 10px;
+}

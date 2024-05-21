@@ -31,10 +31,12 @@ const IngredientListChecker = () => {
 
             <IngredientListInput set_ingrList={set_ingrList}/>
 
-            <div className={"input__btn"} onClick={handleAnalysisRequest}>
-                <a>
-                    Проверить состав</a>
-            </div>
+            <center>
+                <div className={"input__btn"} onClick={handleAnalysisRequest}>
+                    Проверить состав
+                </div>
+            </center>
+
         </div>
     );
 };
