@@ -10,11 +10,20 @@ import {observer} from "mobx-react-lite";
 const App = observer (() => {
 
     const {user} = useContext(Context);
+    const {ingr} = useContext(Context);
 
     useEffect( () => {
         if (localStorage.getItem('access')) {
             user.isAuth = true;
         }
+        // const fetchIngredients = async () => {
+        //     try {
+        //         await ingr.fetchIngrNames();
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // }
+        // fetchIngredients();
     }, []);
 
     return (

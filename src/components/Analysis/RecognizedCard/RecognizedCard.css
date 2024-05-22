@@ -1,0 +1,9 @@
+.ingr_recognized {
+    margin-top: 15px;
+    font-size: var(--2-font-size);
+    font-family: var(--third-font);
+    line-height: 30px;
+}
+.ingr_recognized span{
+    padding-right: 10px;
+}

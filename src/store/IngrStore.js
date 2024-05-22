@@ -11,54 +11,10 @@ class IngrStore {
 
 
     constructor() {
-        this._property = [
-            { id: 1, property_name: 'Питание кожи' },
-            { id: 2, property_name: 'Смягчение кожи' },
-            { id: 3, property_name: 'Увлажнение кожи' },
-            { id: 4, property_name: 'Удержание влаги в коже' },
-            { id: 5, property_name: 'Антибактериальное свойство' },
-            { id: 6, property_name: 'Дезодорирующий эффект' },
-            { id: 7, property_name: 'Очищение кожи' },
-            { id: 8, property_name: 'Борьба с высыпаниями' }
-        ];
-        // { id: 1, property_name: 'Питание кожи' },
-        // { id: 2, property_name: 'Смягчение кожи' },
-        // { id: 3, property_name: 'Увлажнение кожи' },
-        // { id: 4, property_name: 'Удержание влаги в коже' },
-        // { id: 5, property_name: 'Антибактериальное свойство' },
-        // { id: 6, property_name: 'Дезодорирующий эффект' },
-        // { id: 7, property_name: 'Очищение кожи' },
-        // { id: 8, property_name: 'Борьба с высыпаниями' }
-        this._ingr = [
-            { id: 1, ingr_name: 'aqua', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 2, ingr_name: 'caprylic/capric triglyceride', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 3, ingr_name: 'cetearyl glucoside', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 4, ingr_name: 'peg-100 stearate', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 5, ingr_name: '1,2-hexanediol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 6, ingr_name: 'propylene glycol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 7, ingr_name: 'phenoxyethanol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 8, ingr_name: 'candida bombicola/glucose/methyl rapeseedate ferment', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 9, ingr_name: 'пэг-40 гидрогенизированное касторовое масло', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-            { id: 10, ingr_name: 'метилизотиазолинон', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' }
-        ]; // for ComponentSearch
-        // { id: 1, ingr_name: 'aqua', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 2, ingr_name: 'caprylic/capric triglyceride', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 3, ingr_name: 'cetearyl glucoside', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 4, ingr_name: 'peg-100 stearate', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 5, ingr_name: '1,2-hexanediol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 6, ingr_name: 'propylene glycol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 7, ingr_name: 'phenoxyethanol', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 8, ingr_name: 'candida bombicola/glucose/methyl rapeseedate ferment', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 9, ingr_name: 'пэг-40 гидрогенизированное касторовое масло', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' },
-        // { id: 10, ingr_name: 'метилизотиазолинон', description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи' }
-        this._ingrOne = [
-            {   id: 1,
-                ingr_name: 'aqua',
-                synon: 'aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua, aqua',
-                description: 'дезодорирующий эффект, борьба с высыпаниями, очищение кожи',
-            },
-        ]; // for IngredientCard
-        this._ingrNames = []; // for TypoCheck
+        this._property = []; // for ComponentSearch
+        this._ingr = []; // for ComponentSearch
+        this._ingrOne = {}; // for IngredientCard
+        this._ingrNames = {        }; // for TypoCheck
 
         makeAutoObservable(this); // следим за изменениями переменных
     }
@@ -74,14 +30,6 @@ class IngrStore {
     }
     setIngrNames(ingrNames) {
         this._ingrNames = ingrNames;
-        // if (Array.isArray(ingrNames)) {
-        //     this._ingrNames = ingrNames;
-        // } else {
-        //     console.error("ingrNames is not an array:", ingrNames);
-        //     this._ingrNames = [];
-        // }
-        // this._ingrNames = ingrNames.map((name, index) => ({ id: index, name }));
-        // this._ingrNames = ingrNames;
     }
 
     // вызываются только в случае если переменная была изменена
@@ -116,8 +64,8 @@ class IngrStore {
         this.ingrLoadingStatus = LOADING_STATUS.LOADING;
 
         try {
-            // const response = await fetchIngr();
-            // this.setIngr(response);
+            const response = await fetchIngrs();
+            this.setIngr(response);
             this.ingrLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);
@@ -143,6 +91,7 @@ class IngrStore {
         try {
             const response = await fetchIngrNames();
             this.setIngrNames(response);
+            console.log(this.ingrNames);
             this.ingrNamesLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);

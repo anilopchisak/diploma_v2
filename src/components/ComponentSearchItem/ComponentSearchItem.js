@@ -10,14 +10,14 @@ const ComponentSearchItem = ({ingr}) => {
 
     return (
         <div
-            key={ingr.id}
+            key={ingr.inci_id}
             onClick = {handleClick}
             className={"comp__search__item"}
         >
             <div className={"comp__search__item__name"}>
-                {ingr.ingr_name.toUpperCase()}
+                {ingr.inci_name.toUpperCase()}
             </div>
-            <div className={"comp__search__item__desc"}>{ingr.description}</div>
+            <div className={"comp__search__item__desc"}>{ingr.synonyms}</div>
         </div>
 
     );

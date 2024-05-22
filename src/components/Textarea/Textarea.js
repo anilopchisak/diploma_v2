@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Textarea.css'
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const Textarea = ({handleNormalize, recText, setTypeInput}) => {
+const Textarea = observer(({handleNormalize, recText, setTypeInput}) => {
     const [Text, setText] = useState(''); // введенный состав
 
     useEffect(() => {
@@ -23,13 +25,13 @@ const Textarea = ({handleNormalize, recText, setTypeInput}) => {
     return (
         <div>
             <textarea className={'textarea_input'}
-                name='inputText'
-                value={Text}
-                onChange={handleChange}
-                placeholder={"Введите состав через запятую."}
+                      name='inputText'
+                      value={Text}
+                      onChange={handleChange}
+                      placeholder={"Введите состав через запятую."}
             />
         </div>
     );
-};
+});
 
 export default Textarea;

@@ -4,7 +4,7 @@ export const COMPARE_ROUTE = '/comparison-check/'
 
 export const INGR_CARD_ROUTE = '/ingredient-card/'
 
-export const ANALYSIS_ROUTE = '/analysis/'
+export const ANALYSIS_ROUTE = '/analyze/get_analysis/'
 
 export const LOGIN_ROUTE = '/users/login/'
 export const REG_ROUTE = '/users/register/'

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./IngredientListInput.css";
 
 // import { PiArrowsClockwise } from "react-icons/pi"; // сбросить все
@@ -13,6 +13,7 @@ import Textarea from "../Textarea/Textarea";
 import ImageEdit from "../ImageEdit/ImageEdit";
 import HandleTesseract from "./Calculations/HandleTesseractProc/HandleTesseract";
 import HandleTesseractProcessing from "./Calculations/HandleTesseractProc/HandleTesseractProcessing";
+import {Context} from "../../index";
 
 const IngredientListInput = ({set_ingrList}) => {
     // тип ввода: txt, img, edit, processing, final - для навигации этапов ввода данных
@@ -27,15 +28,30 @@ const IngredientListInput = ({set_ingrList}) => {
     // распознанный текст
     const [recText, setRecText] = useState('');
 
-    // список ингредиент + концентрация
-    const [finalList, setFinalList] = useState([]);
+    const {ingr} = useContext(Context);
+    // const [fetchingLoading, setFetchingLoading] = useState('loading');
+
+
+    useEffect( () => {
+        const fetchIngredients = async () => {
+            try {
+                await ingr.fetchIngrNames();
+            } catch (err) {
+                console.log(err);
+                // setFetchingLoading('error');
+                // alert('Проверки на очепятки не будет');
+            }
+        }
+        fetchIngredients();
+    }, []);
 
     const set_typeInput = (a) => {
         setTypeInput(a);
     }
     // set_normText
     const handleNormalization = (Text) => {
-        setNormText(HandleNormalization(Text));
+        const ingr_names = ingr.ingrNames.ingr_names;
+        setNormText(HandleNormalization(Text, ingr_names));
     }
 
     const set_image = (a) => {
@@ -44,7 +60,8 @@ const IngredientListInput = ({set_ingrList}) => {
 
     const set_recText = (a) => {
         setRecText(a);
-        setNormText(HandleNormalization(a));
+        const ingr_names = ingr.ingrNames.ingr_names;
+        setNormText(HandleNormalization(a, ingr_names));
     }
 
     const set_CroppedImage = (a) => {
@@ -90,7 +107,8 @@ const IngredientListInput = ({set_ingrList}) => {
             // console.log(recText);
             setRecText(recText.replace(/\s+/g, ' '));
             // console.log(recText);
-            setNormText(HandleNormalization(recText));
+            const ingr_names = ingr.ingrNames.ingr_names;
+            setNormText(HandleNormalization(recText, ingr_names));
             setTypeInput('final');
         }
     }, [recText]);

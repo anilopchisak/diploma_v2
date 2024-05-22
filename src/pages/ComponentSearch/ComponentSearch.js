@@ -14,9 +14,16 @@ const ComponentSearch = observer(() => {
     const { ingr: IngrStore } = useContext(Context);
 
     useEffect( () => {
-        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(IngrStore.ingrsLoadingStatus)) return;
-        IngrStore.fetchIngr();
-    }, [IngrStore]); // Изменить на [] для вызова только один раз
+        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(IngrStore.ingrLoadingStatus)) return;
+        const fetchIngredients = async () => {
+            try {
+                await IngrStore.fetchIngr();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchIngredients();
+    }, []);
 
     const onPropertyChange = (property) => {
         setProperty(property);
@@ -56,8 +63,8 @@ const ComponentSearch = observer(() => {
                         <div>No ingredients found.</div>
                         :
                         <div>
-                            {IngrStore.ingr.map(ingr => (
-                                <ComponentSearchItem key={ingr.id} ingr={ingr} />
+                            {IngrStore.ingr.ingredients.map((ingr, ingrIndex) => (
+                                <ComponentSearchItem key={ingrIndex} ingr={ingr} />
                             ))}
                         </div>
                     }

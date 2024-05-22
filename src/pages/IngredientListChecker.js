@@ -1,17 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import IngredientListInput from "../components/IngredientListChecker/IngredientListInput";
+import {Context} from "../index";
+import {useNavigate} from "react-router-dom";
+import {ANALYSIS_ROUTE} from "../utils/consts";
+import {LOADING_STATUS} from "../store/storeUtils";
 
 const IngredientListChecker = () => {
     const [ingrList, setIngrList] = useState([]);
+    const navigate = useNavigate();
+    const {analysis} = useContext(Context);
 
-    const handleAnalysisRequest = () => {
+    const handleAnalysisRequest = async () => {
         if (!ingrList.length) {
             // make json and post ingrList.json
             alert("Поле ввода состава обязательное!")
         }
         else {
-            console.log(ingrList);
-            console.log("Анализ:" + ingrList);
+            // analysis.setIngrList(ingrList);
+            // console.log(analysis._ingrList);
+            // const ingrList_array = [...ingrList];
+            try{
+                await analysis.fetchAnalysis(ingrList);
+                if (analysis.analysisLoadingStatus === LOADING_STATUS.SUCCESS) {
+                    navigate(ANALYSIS_ROUTE);
+                }
+                if (analysis.analysisLoadingStatus === LOADING_STATUS.ERROR) {
+                    alert("Произошла ошибка на стороне сервера. Попробуйте позже.")
+                }
+            } catch(e) {
+                alert(e.message);
+            }
         }
     }
 
