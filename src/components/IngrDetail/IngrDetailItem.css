@@ -14,6 +14,7 @@
 }
 .card__item__name {
     font-size: var(--3-font-size);
+    margin-right: 15px;
 }
 
 .card__role {
@@ -21,4 +22,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.detail__general_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.detail__item {
+    text-align: center;
+    align-items: center;
+    width: 20rem;
 }

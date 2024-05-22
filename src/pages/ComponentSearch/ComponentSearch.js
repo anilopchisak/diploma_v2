@@ -15,6 +15,7 @@ const ComponentSearch = observer(() => {
 
     useEffect( () => {
         if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(IngrStore.ingrLoadingStatus)) return;
+        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(IngrStore.propertyLoadingStatus)) return;
         const fetchIngredients = async () => {
             try {
                 await IngrStore.fetchIngr();
@@ -42,11 +43,13 @@ const ComponentSearch = observer(() => {
                         <div className={"wrapper__search__input__dropdown"}>
                             <select className={"search__input__dropdown"}
                                     onChange={(event) => onPropertyChange(event.target.value)}> {/* Удалить parseFloat */}
-                                <option value={property} name={"property"}>Не выбрано</option>
+                                <option value={property} name={"property"}>не выбрано</option>
                                 {
-                                    IngrStore.property.map(property =>
-                                        <option value={property.id} key={property.id}>
-                                            {property.name}
+                                    IngrStore.property.map((property, propertyIndex) =>
+                                        <option
+                                            value={propertyIndex}
+                                            key={propertyIndex}>
+                                            {property}
                                         </option>
                                     )
                                 }

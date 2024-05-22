@@ -4,35 +4,39 @@ import {Context} from "../../index";
 import {LOADING_STATUS} from "../../store/storeUtils";
 import IngrDetailItem from "../../components/IngrDetail/IngrDetailItem";
 import {useParams} from "react-router-dom";
-import IngrDetailConst from "../../components/IngrDetail/IngrDetailConst";
 
 
 const IngredientCard = observer(() => {
-    const {ingrDetail} = useContext(Context);
-    const {id} = useParams();
+    const {ingr} = useContext(Context);
+    const {ingr_name} = useParams();
 
-    useEffect(() => {
-        ingrDetail.fetchIngrDetail(id);
-
-        return () => {
-            ingrDetail.resetLoadingStatus();
+    useEffect( () => {
+        const fetchIngredients = async () => {
+            try {
+                await ingr.fetchIngrOne(ingr_name);
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }, [])
+        fetchIngredients();
+    }, []);
 
 
     return (
         <div className={"card__wrapper"}>
             {
-                ingrDetail.ingrDetailLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
+                ingr.ingrOneLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
             }
             {
-                ingrDetail.ingrDetailLoadingStatus === LOADING_STATUS.ERROR && "Error"
+                ingr.ingrOneLoadingStatus === LOADING_STATUS.ERROR && "Error"
             }
             {
-                ingrDetail.ingrDetailLoadingStatus === LOADING_STATUS.IDLE && "No data"
+                ingr.ingrOneLoadingStatus === LOADING_STATUS.IDLE && "No data"
             }
             {
-                ingrDetail.ingrDetailLoadingStatus === LOADING_STATUS.SUCCESS && ingrDetail.ingrDetail && <IngrDetailConst/>
+                ingr.ingrOneLoadingStatus === LOADING_STATUS.SUCCESS &&
+                ingr.ingrOne &&
+                <IngrDetailItem ingr={ingr.ingrOne}/>
             }
         </div>
     );

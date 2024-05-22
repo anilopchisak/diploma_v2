@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import "../HistoryProfile/HistoryProfile.css"
 import {LOADING_STATUS} from "../../../store/storeUtils";
 import UserStore from "../../../store/UserStore";
 import { PiHeart } from "react-icons/pi";
 import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
 
 const FavItem = ({favs}) => {
     return(
@@ -16,20 +17,48 @@ const FavItem = ({favs}) => {
 }
 
 const FavoritesProfile = () => {
-    const {user: UserStore} = useContext(Context);
+    const {user} = useContext(Context);
 
-    if (!UserStore) return null;
+    useEffect( () => {
+        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(user.favsLoadingStatus)) return;
+        const fetchFavorites = async () => {
+            try {
+                await user.fetchFavs('favorites');
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchFavorites();
+    }, [user]);
 
     return (
         <div className={"history__wrapper"}>
-            <div className={"history__row"}>
-                <div className={"history__grid"}>
-                    {UserStore.favs.map( favs =>
-                        <FavItem key={favs.id} favs={favs}/>
-                    )}
+            {
+                user.favsLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
+            }
+            {
+                user.favsLoadingStatus === LOADING_STATUS.ERROR && "Error"
+            }
+            {
+                user.favsLoadingStatus === LOADING_STATUS.IDLE && "No data"
+            }
+            {
+                user.favsLoadingStatus === LOADING_STATUS.SUCCESS &&
+                user.favs &&
+                <div className={"history__row"}>
+                    <div className={"history__grid"}>
+                        {!user.favs ?
+                            'У вас еще нет избранных составов'
+                            :
+                            <div>
+                                {user.favs.records.map(fav =>
+                                    <FavItem key={fav.id} favs={fav}/>
+                                )}
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-
+            }
         </div>
     );
 };

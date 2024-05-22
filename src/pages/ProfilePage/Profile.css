@@ -1,3 +1,42 @@
 .profile__content {
     width: 100%;
 }
+
+.navbarProfile__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--first-font);
+    font-size: var(--1-font-size);
+
+    margin-bottom: 30px;
+}
+.navProfile__item {
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navProfile__link {
+    display: flex;
+    align-items: center;
+}
+
+.linkProfile__img {
+    height: 30px;
+    width: auto;
+    color: var(--3-color);
+    transition: color 0.3s ease-in 0s;
+}
+
+.linkProfile__text {
+    margin-left: 5px;
+    color: var(--3-color);
+    transition: color 0.3s ease-in 0s;
+}
+
+#auth__btn {
+    margin: 0;
+}

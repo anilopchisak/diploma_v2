@@ -1,7 +1,8 @@
 .ingr_recognized {
     margin-top: 15px;
     font-size: var(--2-font-size);
-    font-family: var(--third-font);
+    font-family: var(--second-font);
+    font-weight: 500;
     line-height: 30px;
 }
 .ingr_recognized span{

@@ -1,24 +1,19 @@
 import {makeAutoObservable} from "mobx";
 
-import {check, login, logout, registration} from "../http/userAPI";
+import {check, fetchFavs, fetchHistory, login, logout, registration} from "../http/userAPI";
+import {LOADING_STATUS} from "./storeUtils";
 
 class UserStore {
+    userLoadingStatus = LOADING_STATUS.IDLE;
+    favsLoadingStatus = LOADING_STATUS.IDLE;
+    historyLoadingStatus = LOADING_STATUS.IDLE;
 
     constructor() {
         this._isAuth = false;
         this._user = {};
         this._history = [];
-        // { id: 1, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 2, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 3, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 4, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 5, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 6, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 7, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' },
-        // { id: 8, date: '13:54 16/01/2024', list: 'aqua, caprylic/capric triglyceride, cetearyl glucoside, peg-100 stearate, 1,2-hexanediol, propylene glycol, phenoxyethanol, candida bombicola/glucose/methyl rapeseedate ferment, пэг-40 гидрогенизированное касторовое масло, метилизотиазолинон' }
         this._favs = [];
-        // this._pass = {};
-        // this._email = {};
+
         makeAutoObservable(this); // следим за изменениями переменных
     }
 
@@ -35,28 +30,29 @@ class UserStore {
     setFavs(favs) {
         this._favs = favs;
     }
+
+    // вызываются только в случае если переменная была изменена
+    get isAuth() {
+        return this._isAuth;
+    }
+    get user() {
+        return this._user;
+    }
+    get history() {
+        return this._history;
+    }
+    get favs() {
+        return this._favs;
+    }
+
     async register(username, email, pass, pass2) {
         try {
             const response = await registration(username, email, pass, pass2);
             console.log(response);
-            // localStorage.setItem('token', response.access); // Используем accessToken
-            // this.setIsAuth(true);
-            // this.setUser(response.user);
         } catch (e) {
-            console.log(e.response?.data?.message);
+            console.log(e.message);
         }
     }
-    // async login(log, pass) {
-    //     try {
-    //         const response = await login(log, pass);
-    //         console.log(response);
-    //         localStorage.setItem('token', response.access); // Используем accessToken
-    //         this.setIsAuth(true);
-    //         this.setUser(response.user);
-    //     } catch (e) {
-    //         console.log(e.response?.data?.message);
-    //     }
-    // }
 
     async checkAuth() {
         try {
@@ -67,7 +63,7 @@ class UserStore {
             this.setUser(response.user);
 
         } catch (e) {
-            console.log(e.response?.data?.message);
+            console.log(e.message);
         }
     }
     async login(username, email, pass) {
@@ -93,18 +89,30 @@ class UserStore {
         }
     }
 
-    // вызываются только в случае если переменная была изменена
-    get isAuth() {
-        return this._isAuth;
+    async fetchFavs(option) {
+        this.favsLoadingStatus = LOADING_STATUS.LOADING;
+
+        try {
+            const response = await fetchFavs(option);
+            this.setFavs(response);
+            this.favsLoadingStatus = LOADING_STATUS.SUCCESS;
+        } catch(e) {
+            console.log(e.message);
+            this.favsLoadingStatus = LOADING_STATUS.ERROR;
+        }
     }
-    get user() {
-        return this._user;
-    }
-    get history() {
-        return this._history;
-    }
-    get favs() {
-        return this._favs;
+
+    async fetchHistory(option) {
+        this.historyLoadingStatus = LOADING_STATUS.LOADING;
+
+        try {
+            const response = await fetchHistory(option);
+            this.setHistory(response);
+            this.historyLoadingStatus = LOADING_STATUS.SUCCESS;
+        } catch(e) {
+            console.log(e.message);
+            this.historyLoadingStatus = LOADING_STATUS.ERROR;
+        }
     }
 
 }

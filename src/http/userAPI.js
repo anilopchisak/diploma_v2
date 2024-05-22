@@ -26,3 +26,15 @@ export const check = async () => {
     localStorage.setItem('token', data.access);
     return jwtDecode(data.token);
 }
+
+export const fetchFavs = async (option) => {
+    const {data} = await $authHost.get('http://localhost:8000/profile/' + option);
+    console.log(data);
+    return data;
+}
+
+export const fetchHistory = async (option) => {
+    const {data} = await $authHost.get('http://localhost:8000/profile/' + option);
+    console.log(data);
+    return data;
+}

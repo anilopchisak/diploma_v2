@@ -1,8 +1,8 @@
 export const IL_CHECK_ROUTE = '/analyze/'
-export const COMP_SEARCH_ROUTE = '/component-search/'
+export const COMP_SEARCH_ROUTE = '/ingredient_search/'
 export const COMPARE_ROUTE = '/comparison-check/'
 
-export const INGR_CARD_ROUTE = '/ingredient-card/'
+export const INGR_CARD_ROUTE = '/ingredient_search/'
 
 export const ANALYSIS_ROUTE = '/analyze/get_analysis/'
 
@@ -13,5 +13,5 @@ export const EMAIL_CONFIRM_ROUTE = '/account-confirm-email/'
 export const PROFILE_ROUTE = '/profile/'
 
 export const SETTINGS_ROUTE = '/profile/settings/'
-export const FAVS_ROUTE = '/profile/favs/'
-export const HIST_ROUTE = '/profile/search-history/'
+export const FAVS_ROUTE = '/profile/favorites/'
+export const HIST_ROUTE = '/profile/history/'

@@ -6,7 +6,7 @@ import { PiList, PiX } from "react-icons/pi";
 
 import {
     COMP_SEARCH_ROUTE,
-    COMPARE_ROUTE,
+    COMPARE_ROUTE, HIST_ROUTE,
     IL_CHECK_ROUTE, LOGIN_ROUTE,
     PROFILE_ROUTE,
     REG_ROUTE,
@@ -78,7 +78,7 @@ const Navbar = observer(() => {
 
                         {(user.isAuth) ?
                             <MenuItem
-                                to={PROFILE_ROUTE}
+                                to={HIST_ROUTE}
                                 text={"Мой профиль"}
                                 class_name={"input__btn"}></MenuItem>
                             :

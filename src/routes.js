@@ -67,7 +67,7 @@ export const publicRoutes = [
         title: 'Зарегистрироваться'
     },
     {
-        path: INGR_CARD_ROUTE + ':id',
+        path: INGR_CARD_ROUTE + ':ingr_name',
         element: <IngredientCard/>,
         title: 'Ингредиент'
     },

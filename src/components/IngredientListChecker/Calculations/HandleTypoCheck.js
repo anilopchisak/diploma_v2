@@ -16,7 +16,7 @@ function HandleTypoCheck(inputString, ingrNames) {
     for (let i = 0; i < ingrNames.length; i++) {
         // Проведение сравнения с использованием Jaro-Winkler для каждого элемента
         const similarity = jaroWinkler(ingrNames[i], inputString);
-        console.log(inputString, similarity);
+        // console.log(inputString, similarity);
         if (similarity === 1) {
             return inputString;
         } else if (similarity > min && similarity > 0.8) {

@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {LOADING_STATUS} from "./storeUtils";
-import {fetchIngrNames, fetchIngrs} from "../http/IngrAPI";
-import React, {useEffect} from "react";
+import {fetchIngr, fetchIngrNames, fetchIngrOne, fetchProperty} from "../http/IngrAPI";
+import React from "react";
 
 class IngrStore {
     propertyLoadingStatus = LOADING_STATUS.IDLE;
@@ -9,12 +9,11 @@ class IngrStore {
     ingrOneLoadingStatus = LOADING_STATUS.IDLE;
     ingrNamesLoadingStatus = LOADING_STATUS.IDLE;
 
-
     constructor() {
         this._property = []; // for ComponentSearch
         this._ingr = []; // for ComponentSearch
         this._ingrOne = {}; // for IngredientCard
-        this._ingrNames = {        }; // for TypoCheck
+        this._ingrNames = {}; // for TypoCheck
 
         makeAutoObservable(this); // следим за изменениями переменных
     }
@@ -46,39 +45,43 @@ class IngrStore {
         return this._ingrNames;
     }
 
-    async fetchProperty() {
-
-        this.propertyLoadingStatus = LOADING_STATUS.LOADING;
-
-        try {
-            // const response = await fetchProperty();
-            // this.setProperty(response);
-            this.propertyLoadingStatus = LOADING_STATUS.SUCCESS;
-        } catch(e) {
-            console.log(e.message);
-            this.propertyLoadingStatus = LOADING_STATUS.ERROR;
-        }
-    }
+    // async fetchProperty() {
+    //
+    //     this.propertyLoadingStatus = LOADING_STATUS.LOADING;
+    //
+    //     try {
+    //         const response = await fetchProperty();
+    //         this.setProperty(response);
+    //         this.propertyLoadingStatus = LOADING_STATUS.SUCCESS;
+    //     } catch(e) {
+    //         console.log(e.message);
+    //         this.propertyLoadingStatus = LOADING_STATUS.ERROR;
+    //     }
+    // }
     async fetchIngr() {
 
         this.ingrLoadingStatus = LOADING_STATUS.LOADING;
 
         try {
-            const response = await fetchIngrs();
+            const response = await fetchIngr();
             this.setIngr(response);
+            this.setProperty(response.positive_effects);
+            console.log(this.property);
             this.ingrLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);
             this.ingrLoadingStatus = LOADING_STATUS.ERROR;
         }
     }
-    async fetchIngrOne() {
+    async fetchIngrOne(ingr_name) {
 
         this.ingrOneLoadingStatus = LOADING_STATUS.LOADING;
 
         try {
-            // const response = await fetchIngrOne();
-            // this.setIngrOne(response);
+            let ingr_name_replaced = ingr_name.replace(/_/g, '/');
+            ingr_name_replaced = ingr_name_replaced.replace(/%20/g, ' ');
+            const response = await fetchIngrOne(ingr_name_replaced);
+            this.setIngrOne(response);
             this.ingrOneLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);
@@ -91,7 +94,7 @@ class IngrStore {
         try {
             const response = await fetchIngrNames();
             this.setIngrNames(response);
-            console.log(this.ingrNames);
+            // console.log(this.ingrNames);
             this.ingrNamesLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);

@@ -2,12 +2,13 @@ import React, {useContext, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 
 import {Context} from "../../index";
-import {LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE} from "../../utils/consts";
+import {HIST_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE} from "../../utils/consts";
 
 import "./RegAuth.css";
 import "../../components/IngredientListChecker/IngredientListInput.css";
+import {observer} from "mobx-react-lite";
 
-const RegAuth = () => {
+const RegAuth = observer(() => {
     const isLogin = window.location.pathname === LOGIN_ROUTE
     const {user} = useContext(Context);
     const navigate = useNavigate();
@@ -22,15 +23,16 @@ const RegAuth = () => {
         try{
             if (isLogin){
                 await user.login(username, email, password);
-                navigate(PROFILE_ROUTE);
+                navigate(HIST_ROUTE);
 
             } else {
+                // console.log(username, email, password, passwordCheck)
                 await user.register(username, email, password, passwordCheck);
                 alert(" Проверьте свою почту и перейдите по ссылке в отправленном вам письме для завершения регистрации.");
             }
             // navigate(PROFILE_ROUTE);
         } catch(e){
-            alert(e.response.data.message);
+            alert(e.message);
         }
     }
 
@@ -179,6 +181,6 @@ const RegAuth = () => {
             </div>
         </div>
     );
-};
+});
 
 export default RegAuth;
