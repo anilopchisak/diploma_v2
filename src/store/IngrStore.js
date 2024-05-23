@@ -78,9 +78,7 @@ class IngrStore {
         this.ingrOneLoadingStatus = LOADING_STATUS.LOADING;
 
         try {
-            let ingr_name_replaced = ingr_name.replace(/_/g, '/');
-            ingr_name_replaced = ingr_name_replaced.replace(/%20/g, ' ');
-            const response = await fetchIngrOne(ingr_name_replaced);
+            const response = await fetchIngrOne(ingr_name);
             this.setIngrOne(response);
             this.ingrOneLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {

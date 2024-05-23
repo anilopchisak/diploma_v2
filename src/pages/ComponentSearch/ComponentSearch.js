@@ -10,8 +10,10 @@ import {PiCaretDown} from "react-icons/pi";
 import ComponentSearchItem from "../../components/ComponentSearchItem/ComponentSearchItem";
 
 const ComponentSearch = observer(() => {
-    const [property, setProperty] = useState('');
     const { ingr: IngrStore } = useContext(Context);
+    const [property, setProperty] = useState('');
+    const [search, setSearch] = useState('');
+    // console.log(property);
 
     useEffect( () => {
         if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(IngrStore.ingrLoadingStatus)) return;
@@ -29,13 +31,37 @@ const ComponentSearch = observer(() => {
     const onPropertyChange = (property) => {
         setProperty(property);
     }
+    const onSearchChange = (search) => {
+        setSearch(search);
+    }
+
+    // const handleSearch = (ingr) => {
+    //     if (property) {
+    //         return ingr.filter( (item) =>
+    //             item.synonyms.map((item2) =>
+    //                 item2.toLowerCase().includes(search)
+    //             )
+    //             &&
+    //             item.effects.map((item3) =>
+    //                 item3.toLowerCase().includes(property)
+    //             )
+    //         );
+    //     }
+    //     else {
+    //         return ingr.filter((item) =>
+    //             item.synonyms.map((item2) =>
+    //                 item2.toLowerCase().includes(search)
+    //             )
+    //         );
+    //     }
+    // }
 
     return (
         <div className={"wrapper"}>
             <div className={'input__name'}><h3>ПОИСК КОМПОНЕНТА</h3></div>
             <div className={"wrapper__search"}>
                 <div className={"search__input"}>
-                    <SearchInput />
+                    <SearchInput setSearch={onSearchChange}/>
 
                     <div className={"search__input__select"}>
                         <div><label>Полезный эффект</label></div>
@@ -43,11 +69,11 @@ const ComponentSearch = observer(() => {
                         <div className={"wrapper__search__input__dropdown"}>
                             <select className={"search__input__dropdown"}
                                     onChange={(event) => onPropertyChange(event.target.value)}> {/* Удалить parseFloat */}
-                                <option value={property} name={"property"}>не выбрано</option>
+                                <option value={''} name={"property"}>не выбрано</option>
                                 {
                                     IngrStore.property.map((property, propertyIndex) =>
                                         <option
-                                            value={propertyIndex}
+                                            value={property}
                                             key={propertyIndex}>
                                             {property}
                                         </option>
@@ -66,10 +92,31 @@ const ComponentSearch = observer(() => {
                         <div>No ingredients found.</div>
                         :
                         <div>
-                            {IngrStore.ingr.ingredients.map((ingr, ingrIndex) => (
-                                <ComponentSearchItem key={ingrIndex} ingr={ingr} />
-                            ))}
+                            {property ?
+                                <div>
+                                    {IngrStore.ingr.ingredients.filter((item) =>
+                                            item.synonyms.some((item2) =>
+                                                item2.toLowerCase().includes(search)
+                                            ) && item.effects.some((item3) =>
+                                                item3.toLowerCase().includes(property)
+                                            )
+                                    ).map((ingr, ingrIndex) => (
+                                        <ComponentSearchItem key={ingrIndex} ingr={ingr}/>
+                                    ))}
+                                </div>
+                                :
+                                <div>
+                                    {IngrStore.ingr.ingredients.filter((item) =>
+                                        item.synonyms.some((item2) =>
+                                            item2.toLowerCase().includes(search)
+                                        )
+                                    ).map((ingr, ingrIndex) => (
+                                        <ComponentSearchItem key={ingrIndex} ingr={ingr}/>
+                                    ))}
+                                </div>
+                            }
                         </div>
+
                     }
                 </div>
             </div>
@@ -78,3 +125,12 @@ const ComponentSearch = observer(() => {
 });
 
 export default ComponentSearch;
+
+// {/*{IngrStore.ingr.ingredients.map((ingr, ingrIndex) => (*/}
+// {/*    <ComponentSearchItem key={ingrIndex} ingr={ingr}/>*/}
+// {/*))}*/}
+// {/*{IngrStore.ingr.ingredients.filter((item) => {*/}
+// {/*    handleSearch(item)*/}
+// {/*}).map((ingr, ingrIndex) => (*/}
+// {/*    <ComponentSearchItem key={ingrIndex} ingr={ingr}/>*/}
+// {/*))}*/}
