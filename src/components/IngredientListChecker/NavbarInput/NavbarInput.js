@@ -4,9 +4,9 @@ import './NavbarInput.css'
 import {PiImage, PiTextT} from "react-icons/pi";
 import { Tooltip } from 'react-tooltip'
 
-const NavbarInput = ({setTypeInput}) => {
+const NavbarInput = ({setTypeInput, styleType}) => {
     return (
-        <div className={"navbarInput__container"}>
+        <div className={styleType ? "navbarInput__container" : "navbarInput__container__comparison"}>
             <ul className={"navInput__menu"}>
                 <li className={"navInput__item"}>
                     <a className={"navInput__link"} onClick={() => setTypeInput('txt')}>
@@ -26,3 +26,4 @@ const NavbarInput = ({setTypeInput}) => {
 };
 
 export default NavbarInput;
+// styleType ? "navbarInput__container" : "navbarInput__container__comparison"

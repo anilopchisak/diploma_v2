@@ -1,10 +1,23 @@
 .textarea_input {
     padding: 5px 10px;
-    width: 700px;
-    height: 500px;
+    width: 45rem;
+    height: 27rem;
     resize: none;
     font-family: var(--second-font);
     font-size: var(--1-font-size);
     background-color: var(--2-color);
     border-color: var(--bg-color-nav);
+    border-radius: 5px;
+}
+
+.textarea_input_comparison {
+    padding: 5px 10px;
+    width: 45rem;
+    height: 21rem;
+    resize: none;
+    font-family: var(--second-font);
+    font-size: var(--1-font-size);
+    background-color: var(--2-color);
+    border-color: var(--bg-color-nav);
+    border-radius: 5px;
 }

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import IngredientListInput from "../components/IngredientListChecker/IngredientListInput";
+import IngredientListInput from "../../components/IngredientListChecker/IngredientListInput";
+import './Comparison.css'
 
 const Comparison = () => {
     const [ingrList1, setIngrList1] = useState([]);
@@ -24,15 +25,14 @@ const Comparison = () => {
         setIngrList2(a);
     }
 
-    // useEffect( () => {
-    //     if (ingrList1) {
-    //         console.log(ingrList1);
-    //     }
-    // }, [ingrList1]);
-
     return (
         <div>
             <div className={'input__name'}><h3>СРАВНЕНИЕ СОСТАВОВ</h3></div>
+
+            <div id={'comparison_wrapper'}>
+                <IngredientListInput set_ingrList={set_ingrList1} styleType={false}/>
+                <IngredientListInput set_ingrList={set_ingrList2} styleType={false}/>
+            </div>
 
             <center>
                 <div className={"input__btn"}
@@ -40,8 +40,6 @@ const Comparison = () => {
                     Сравнить составы
                 </div>
             </center>
-            <IngredientListInput set_ingrList={set_ingrList1}/>
-            <IngredientListInput set_ingrList={set_ingrList2}/>
 
         </div>
     );

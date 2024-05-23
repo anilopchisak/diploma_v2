@@ -14,12 +14,12 @@ export const fetchIngrNames = async () => {
 
 export const fetchIngr = async () => {
     const {data} = await $host.get('http://localhost:8000/ingredient_search/');
-    console.log(data);
+    // console.log(data);
     return data;
 }
 
 export const fetchIngrOne = async (ingr_name) => {
     const {data} = await $host.get('http://localhost:8000/ingredient_search/' + ingr_name);
-    // console.log(data);
+    console.log(data);
     return data;
 }

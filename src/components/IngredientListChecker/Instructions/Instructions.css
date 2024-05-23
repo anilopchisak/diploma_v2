@@ -3,6 +3,7 @@
     font-size: var(--2-font-size);
     color: var(--2-color);
     line-height: 25px;
+    padding: 0 20px;
 }
 
 .name__instruction {

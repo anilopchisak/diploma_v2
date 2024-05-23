@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Tesseract from 'tesseract.js';
 
-const HandleTesseract = async ({image, setText}) => {
+const HandleTesseract = async ({image, setText, typeInput}) => {
 
     const { createWorker } = Tesseract;
 
@@ -13,16 +13,12 @@ const HandleTesseract = async ({image, setText}) => {
         image,
         {imageColor: true, imageGrey: true, imageBinary: true}
     );
-    setText(data.text);
 
+    if(typeInput === 'processing') {
+        setText(data.text);
+    }
 
-    // const { data } = await Tesseract.recognize(
-    //     image,
-    //     'eng+rus'
-    // );
-    // setText(data.text);
-
-
+    await worker.terminate();
 }
 
 export default HandleTesseract;

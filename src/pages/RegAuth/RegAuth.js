@@ -1,16 +1,14 @@
-import React, {useContext, useState} from 'react';
-import {NavLink, useNavigate} from "react-router-dom";
-
-import {Context} from "../../index";
-import {HIST_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE} from "../../utils/consts";
-
+import React, { useContext, useState } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
+import { Context } from "../../index";
+import { HIST_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REG_ROUTE } from "../../utils/consts";
 import "./RegAuth.css";
 import "../../components/IngredientListChecker/IngredientListInput.css";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 
 const RegAuth = observer(() => {
     const isLogin = window.location.pathname === LOGIN_ROUTE
-    const {user} = useContext(Context);
+    const { user } = useContext(Context);
     const navigate = useNavigate();
 
     const [login, setLogin] = useState('');
@@ -19,19 +17,56 @@ const RegAuth = observer(() => {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
+    const isSimplePassword = (password) => {
+        // Проверка на простоту пароля
+        const simplePasswords = ['qwerty12345']; // добавьте сюда другие простые пароли, если необходимо
+        return !simplePasswords.includes(password);
+    }
+
+    const isStrongPassword = (password) => {
+        // Проверка на силу пароля
+        const strongRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        return strongRegex.test(password);
+    }
+
+    const isEmailValid = (email) => {
+        // Проверка на корректность email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const isUsernameValid = (username) => {
+        // Проверка имени пользователя
+        return /^[a-zA-Z0-9]{3,}$/.test(username);
+    }
+
     const checkData = async () => {
-        try{
-            if (isLogin){
+        try {
+            if (!isSimplePassword(password)) {
+                throw new Error('Пароль не удовлетворяет требованиям');
+            }
+
+            if (!isEmailValid(email)) {
+                throw new Error('Некорректный email');
+            }
+
+            if (!isUsernameValid(username)) {
+                throw new Error('Некорректное имя пользователя');
+            }
+            if (passwordCheck) {
+                if(password !== passwordCheck) {
+                    throw new Error('Пароли не совпадают');
+                }
+            }
+
+            if (isLogin) {
                 await user.login(username, email, password);
                 navigate(HIST_ROUTE);
-
             } else {
-                // console.log(username, email, password, passwordCheck)
                 await user.register(username, email, password, passwordCheck);
                 alert(" Проверьте свою почту и перейдите по ссылке в отправленном вам письме для завершения регистрации.");
             }
-            // navigate(PROFILE_ROUTE);
-        } catch(e){
+        } catch (e) {
             alert(e.message);
         }
     }
@@ -39,7 +74,7 @@ const RegAuth = observer(() => {
     return (
         <div className={"wrapper"}>
             <div className={'input__name'}><h3>
-                { isLogin ?
+                {isLogin ?
                     "ВХОД"
                     :
                     "РЕГИСТРАЦИЯ"
@@ -50,7 +85,7 @@ const RegAuth = observer(() => {
 
                 <div className={"wrapper__regauth__input"}>
                     <form className={'regauth__card'}>
-                        { isLogin ?
+                        {isLogin ?
                             <div className={"auth__acccheck"}>Нет аккаунта?
                                 <NavLink to={REG_ROUTE} className={'navlink__auth'}>Зарегистрироваться</NavLink>
                             </div>
@@ -59,18 +94,8 @@ const RegAuth = observer(() => {
                                 <NavLink to={LOGIN_ROUTE} className={'navlink__auth'}>Войти</NavLink>
                             </div>
                         }
-                        { isLogin ?
+                        {isLogin ?
                             <ul className={"input__auth__form"}>
-                                {/*<li>*/}
-                                {/*    <input*/}
-                                {/*        type="text"*/}
-                                {/*        placeholder="Имя пользователя или email"*/}
-                                {/*        className={"input__auth__place"}*/}
-                                {/*        value={login}*/}
-                                {/*        required*/}
-                                {/*        onChange={(e) => setLogin(e.target.value)}*/}
-                                {/*    />*/}
-                                {/*</li>*/}
                                 <li>
                                     <input
                                         type="text"
@@ -152,7 +177,7 @@ const RegAuth = observer(() => {
                         }
                         <div className={"input__auth__btn"}>
                             <button type={'button'} className={'input__btn'} id={"auth__btn"} onClick={checkData}>
-                                { isLogin ?
+                                {isLogin ?
                                     'Войти'
                                     :
                                     'Зарегистрироваться'

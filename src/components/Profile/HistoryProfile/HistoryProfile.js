@@ -6,63 +6,50 @@ import UserStore from "../../../store/UserStore";
 import { PiHeart } from "react-icons/pi";
 import IngrDetailItem from "../../IngrDetail/IngrDetailItem";
 import {observer} from "mobx-react-lite";
+import capitalizeFirstLetter from "../../capitalizeFirstLetter";
+import DateConverter from "../DateConverter";
 
 const HistoryItem = ({history}) => {
     return(
-        <div key={history.id} className={"history__item"}>
+        <div className={"history__item"}>
             <div className={"icon__fav__wrapper"}><PiHeart className={"icon__fav"}/></div>
-            <div>{history.date}</div>
-            <div>{history.list}</div>
+            <DateConverter dateString={history.date_time}/>
+            <div>
+                {history.ingrs && history.ingrs.ingrs.length > 0 &&
+                    <p>
+                        {history.ingrs.ingrs.map((ingr_name, ingr_nameIndex) => {
+                            const style = {
+                                paddingRight: '10px'
+                            }
+                            const displayName = capitalizeFirstLetter(ingr_name.ingr_name);
+
+                            return (
+                                <span key={ingr_nameIndex} style={style}>
+                                        {displayName},
+                                    </span>
+                            );
+                        })}
+                    </p>
+                }
+            </div>
+
         </div>
     );
 }
 
-const HistoryProfile = () => {
-    const {user} = useContext(Context);
-
-    useEffect(() => {
-        if (user && [LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(user.historyLoadingStatus)) return;
-        const fetchHist = async () => {
-            try {
-                await user.fetchHistory('history');
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        fetchHist();
-    }, [user]);
-
-    if(!user) return null;
+const HistoryProfile = ({user}) => {
 
     return (
         <div className={"history__wrapper"}>
-            {
-                user.historyLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
-            }
-            {
-                user.historyLoadingStatus === LOADING_STATUS.ERROR && "Error"
-            }
-            {
-                user.historyLoadingStatus === LOADING_STATUS.IDLE && "No data"
-            }
-            {
-                user.historyLoadingStatus === LOADING_STATUS.SUCCESS &&
-                user.history &&
-                <div className={"history__row"}>
-                    <div className={"history__grid"}>
-                        {!user.history ?
-                            'У вас еще нет истории поиска'
-                            :
-                            <div>
-                                {user.history.records.map(hist =>
-                                    <HistoryItem key={hist.id} favs={hist}/>
-                                )}
-                            </div>
-                        }
-                    </div>
+            {user.history.records.length === 0 ?
+                'У вас еще нет истории поиска'
+                :
+                <div>
+                    {user.history.records.map((hist, histIndex) =>
+                        <HistoryItem key={histIndex} history={hist}/>
+                    )}
                 </div>
             }
-
         </div>
     );
 };

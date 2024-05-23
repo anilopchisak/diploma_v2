@@ -35,27 +35,6 @@ const ComponentSearch = observer(() => {
         setSearch(search);
     }
 
-    // const handleSearch = (ingr) => {
-    //     if (property) {
-    //         return ingr.filter( (item) =>
-    //             item.synonyms.map((item2) =>
-    //                 item2.toLowerCase().includes(search)
-    //             )
-    //             &&
-    //             item.effects.map((item3) =>
-    //                 item3.toLowerCase().includes(property)
-    //             )
-    //         );
-    //     }
-    //     else {
-    //         return ingr.filter((item) =>
-    //             item.synonyms.map((item2) =>
-    //                 item2.toLowerCase().includes(search)
-    //             )
-    //         );
-    //     }
-    // }
-
     return (
         <div className={"wrapper"}>
             <div className={'input__name'}><h3>ПОИСК КОМПОНЕНТА</h3></div>

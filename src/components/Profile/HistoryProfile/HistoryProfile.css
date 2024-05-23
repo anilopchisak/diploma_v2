@@ -1,7 +1,10 @@
+.history__wrapper{
+    padding: 30px 20px;
+}
 .history__item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     padding: 0 70px;
     transition: background-color 0.3s ease-in-out;
 }

@@ -66,7 +66,6 @@ class IngrStore {
             const response = await fetchIngr();
             this.setIngr(response);
             this.setProperty(response.positive_effects);
-            console.log(this.property);
             this.ingrLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);
@@ -92,7 +91,6 @@ class IngrStore {
         try {
             const response = await fetchIngrNames();
             this.setIngrNames(response);
-            // console.log(this.ingrNames);
             this.ingrNamesLoadingStatus = LOADING_STATUS.SUCCESS;
         } catch(e) {
             console.log(e.message);

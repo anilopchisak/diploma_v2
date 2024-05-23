@@ -1,7 +1,8 @@
 .navbarInput__container {
-    height: 550px;
+    height: 30rem;
     width: 50px;
     background-color: var(--bg-color-nav);
+    /*background: linear-gradient(var(--bg-color-nav), transparent);*/
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: width 0.5s ease;
@@ -9,6 +10,19 @@
     position: absolute;
     z-index: 1000;
 }
+.navbarInput__container__comparison {
+    height: 23rem;
+    width: 50px;
+    /*background-color: var(--bg-color-nav);*/
+    background: linear-gradient(var(--bg-color-nav), transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: width 0.5s ease;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1000;
+}
+
 .navbarInput__container:hover {
     width: 410px;
 }

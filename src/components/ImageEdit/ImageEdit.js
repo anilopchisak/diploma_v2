@@ -5,7 +5,7 @@ import './ImageEdit.css'
 import { PiCheck, PiX, PiArrowClockwise, PiArrowsOut, PiCaretDown } from "react-icons/pi";
 import HandleTesseract from "../IngredientListChecker/Calculations/HandleTesseractProc/HandleTesseract";
 
-const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
+const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image, styleType}) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [rotation, setRotation] = useState(0)
@@ -16,6 +16,11 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
 
     // Вычисление соотношения сторон изображения
     useEffect(() => {
+        setCrop({x: 0, y:0});
+        setZoom(1);
+        setRotation(0);
+        setAspect(null);
+
         const imageObj = new Image();
         imageObj.src = image;
         imageObj.onload = () => {
@@ -41,14 +46,6 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
     const onAspectChange = aspect => {
         setAspect(aspect);
     }
-
-    // useEffect(() => {
-    //     if (aspect == null) {
-    //         const { naturalWidth, naturalHeight } = image;
-    //         const ratio = naturalWidth / naturalHeight;
-    //         setAspect(ratio);
-    //     }
-    // }, [aspect]);
 
     const onCropComplete = (croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
@@ -95,7 +92,7 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
 
     return (
         <div className={"file__edit"}>
-            <div className={"edit__place"}>
+            <div className={styleType ? "edit__place" : "edit__place__comparison" }>
                 <ReactEasyCrop
                     image={image}
                     crop={crop}
@@ -117,7 +114,7 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image}) => {
                 />
             </div>
 
-            <div className={"edit__nav"}>
+            <div className={styleType ? "edit__nav" : 'edit__nav__comparison'}>
                 <div>
                     <PiX className={"edit__nav__icons"}
                          onClick={onEditCancel}/>

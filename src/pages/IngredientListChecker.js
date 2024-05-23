@@ -16,9 +16,6 @@ const IngredientListChecker = () => {
             alert("Поле ввода состава обязательное!")
         }
         else {
-            // analysis.setIngrList(ingrList);
-            // console.log(analysis._ingrList);
-            // const ingrList_array = [...ingrList];
             try{
                 await analysis.fetchAnalysis(ingrList);
                 if (analysis.analysisLoadingStatus === LOADING_STATUS.SUCCESS) {
@@ -37,17 +34,17 @@ const IngredientListChecker = () => {
         setIngrList(a);
     }
 
-    useEffect( () => {
-        if (ingrList) {
-            console.log(ingrList);
-        }
-    }, [ingrList]);
+    // useEffect( () => {
+    //     if (ingrList) {
+    //         console.log(ingrList);
+    //     }
+    // }, [ingrList]);
 
     return (
         <div>
             <div className={'input__name'}><h3>АНАЛИЗ СОСТАВА</h3></div>
 
-            <IngredientListInput set_ingrList={set_ingrList}/>
+            <IngredientListInput set_ingrList={set_ingrList} styleType={true}/>
 
             <center>
                 <div className={"input__btn"} onClick={handleAnalysisRequest}>

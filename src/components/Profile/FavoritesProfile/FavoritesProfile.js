@@ -5,58 +5,46 @@ import UserStore from "../../../store/UserStore";
 import { PiHeart } from "react-icons/pi";
 import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
+import capitalizeFirstLetter from "../../capitalizeFirstLetter";
+import DateConverter from "../DateConverter";
 
 const FavItem = ({favs}) => {
     return(
-        <div key={favs.id} className={"history__item"}>
+        <div className={"history__item"}>
             <div className={"icon__fav__wrapper"}><PiHeart className={"icon__fav"}/></div>
-            <div>{favs.date}</div>
-            <div>{favs.list}</div>
+            <DateConverter dateString={favs.date_time}/>
+            {favs.ingrs && favs.ingrs.ingrs.length > 0 &&
+                <p>
+                    {/*<mark className={"card__item__name"}>Синонимы:</mark>*/}
+                    {favs.ingrs.ingrs.map((ingr_name, ingr_nameIndex) => {
+                        const style = {
+                            paddingRight: '10px'
+                        }
+                        const displayName = capitalizeFirstLetter(ingr_name.ingr_name);
+
+                        return (
+                            <span key={ingr_nameIndex} style={style}>
+                                        {displayName},
+                                    </span>
+                        );
+                    })}
+                </p>
+            }
         </div>
     );
 }
 
-const FavoritesProfile = () => {
-    const {user} = useContext(Context);
-
-    useEffect( () => {
-        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(user.favsLoadingStatus)) return;
-        const fetchFavorites = async () => {
-            try {
-                await user.fetchFavs('favorites');
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        fetchFavorites();
-    }, [user]);
+const FavoritesProfile = ({user}) => {
 
     return (
         <div className={"history__wrapper"}>
-            {
-                user.favsLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
-            }
-            {
-                user.favsLoadingStatus === LOADING_STATUS.ERROR && "Error"
-            }
-            {
-                user.favsLoadingStatus === LOADING_STATUS.IDLE && "No data"
-            }
-            {
-                user.favsLoadingStatus === LOADING_STATUS.SUCCESS &&
-                user.favs &&
-                <div className={"history__row"}>
-                    <div className={"history__grid"}>
-                        {!user.favs ?
-                            'У вас еще нет избранных составов'
-                            :
-                            <div>
-                                {user.favs.records.map(fav =>
-                                    <FavItem key={fav.id} favs={fav}/>
-                                )}
-                            </div>
-                        }
-                    </div>
+            {user.favs.records.length === 0 ?
+                'У вас еще нет избранных составов :('
+                :
+                <div>
+                    {user.favs.records.map((fav, favIndex) =>
+                        <FavItem key={favIndex} favs={fav}/>
+                    )}
                 </div>
             }
         </div>

@@ -10,7 +10,7 @@ import {
 
 import IngredientListChecker from './pages/IngredientListChecker'
 import ComponentSearch from "./pages/ComponentSearch/ComponentSearch";
-import Comparison from "./pages/Comparison";
+import Comparison from "./pages/Comparison/Comparison";
 import RegAuth from "./pages/RegAuth/RegAuth";
 import Profile from "./pages/ProfilePage/Profile";
 import EmailConfirm from "./pages/EmailConfim/EmailConfirm";

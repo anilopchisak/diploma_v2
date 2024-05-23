@@ -34,8 +34,12 @@ const Analysis = () => {
         <div className={"wrapper"}>
             {doRender ?
                 <div>
+                    {/*Состав: распознанное и нет*/}
                     <div className={'analysis__item'}>
-                        <h1><mark>Анализируемый состав</mark></h1>
+                        <div className={'analysis__section_name'}>
+                            <h1><mark>Анализируемый состав</mark></h1>
+                            <p>- ярким цветом выделены те компоненты, которые мы смогли распознать</p>
+                        </div>
                         <RecognizedCard ingrs={analysis.analysis.ingrs}/>
                     </div>
 
@@ -84,72 +88,109 @@ const Analysis = () => {
                                     </div>
                                 }
                             </div>
-                            <NaturalCard natural={analysis.analysis.data.natural}/>
+                            {analysis.analysis.data.natural &&
+                                <NaturalCard natural={analysis.analysis.data.natural}/>
+                            }
                         </div>
                     </div>
 
                     {/*Полезности*/}
                     <div className={'analysis__item'}>
-                        <div className={'analysis__section_name'}>
-                            <h1><mark>Действие средства</mark></h1>
-                            <p>- компоненты перечислены по убыванию интенсивности воздействия</p>
-                        </div>
-                        <div className={'analysis__item'}>
-                            <EffectCard analysis={analysis}/>
-                        </div>
+                        {analysis.analysis.effects &&
+                            analysis.analysis.effects.some((intensity) => intensity.effect_with_ingrs.length > 0) &&
+                            <div>
+                                <div className={'analysis__section_name'}>
+                                    <h1><mark>Действие средства</mark></h1>
+                                    <p>- компоненты перечислены по убыванию интенсивности воздействия</p>
+                                </div>
+                                <div className={'analysis__item'}>
+                                    <EffectCard analysis={analysis}/>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     {/*Побочки*/}
                     <div className={'analysis__item'}>
-                        <div className={'analysis__section_name'}>
-                            <h1><mark>Побочные эффекты</mark></h1>
-                            <p>- возможное негативное воздействие средства на кожу
-                                (интенсивность и возможность проявляения <mark>индивидуальны</mark>)</p>
-                        </div>
-                        <div className={'analysis__item'}>
-                            <NegEffectCard analysis={analysis}/>
-                        </div>
+                        {analysis.analysis.side_effects &&
+                            analysis.analysis.side_effects.length > 0 &&
+                            <div>
+                                <div className={'analysis__section_name'}>
+                                    <h1>
+                                        <mark>Побочные эффекты</mark>
+                                    </h1>
+                                    <p>- возможное негативное воздействие средства на кожу
+                                        (интенсивность и возможность проявляения <mark>индивидуальны</mark>)
+                                    </p>
+                                </div>
+                                <div className={'analysis__item'}>
+                                    <NegEffectCard analysis={analysis}/>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     {/*Рекомендации по применению*/}
                     <div className={'analysis__item'}>
-                        <div className={'analysis__section_name'}>
-                            <h1><mark>Рекоммендации по применению</mark></h1>
-                            <p>- рекомендации определяются из побочных эффектов или из особенностей воздействия определенных компонентов на кожу</p>
-                        </div>
-                        <div className={'analysis__item'}>
-                            {analysis.analysis.recoms.map((recom, recomIndex) =>
-                                <div className={'recom-item'} key={recomIndex}>
-                                    <div>
-                                        <BsExclamationLg className={'analysis-icon'}/>
-                                    </div>
-                                    <div className={'recom-text'}>
-                                        {recom.recom_text.toUpperCase()}
-                                    </div>
+                        {analysis.analysis.recoms &&
+                            analysis.analysis.recoms.length > 0 &&
+                            <div>
+                                <div className={'analysis__section_name'}>
+                                    <h1>
+                                        <mark>Рекоммендации по применению</mark>
+                                    </h1>
+                                    <p>- рекомендации определяются из побочных эффектов или из особенностей воздействия
+                                        определенных компонентов на кожу</p>
                                 </div>
-                            )}
-                        </div>
+                                <div className={'analysis__item'}>
+                                    {analysis.analysis.recoms.map((recom, recomIndex) =>
+                                        <div className={'recom-item'} key={recomIndex}>
+                                            <div>
+                                                <BsExclamationLg className={'analysis-icon'}/>
+                                            </div>
+                                            <div className={'recom-text'}>
+                                                {recom.recom_text.toUpperCase()}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     {/*Ингредиенты*/}
                     <div className={'analysis__item'}>
-                        <div className={'analysis__section_name'}>
-                            <h1><mark>Ингредиенты</mark></h1>
-                        </div>
-                        <div className={'analysis__item'}>
-                            <IngrCard ingrs={analysis.analysis.ingrs}/>
-                        </div>
+                        {analysis.analysis.ingrs &&
+                            analysis.analysis.ingrs.length > 0 &&
+                            <div>
+                                <div className={'analysis__section_name'}>
+                                    <h1>
+                                        <mark>Ингредиенты</mark>
+                                    </h1>
+                                </div>
+                                <div className={'analysis__item'}>
+                                    <IngrCard ingrs={analysis.analysis.ingrs}/>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     {/*Комбинирование*/}
                     <div className={'analysis__item'}>
-                        <div className={'analysis__section_name'}>
-                            <h1><mark>Комбинирование</mark></h1>
-                            <p>- рекомендации по комбинированию средства с различными компонентами</p>
-                        </div>
-                        <div className={'analysis__item'}>
-                            <CombCard combs={analysis.analysis.combs}/>
-                        </div>
+                        {analysis.analysis.combs &&
+                            analysis.analysis.combs.some((comb_type) => comb_type.combination.length > 0) &&
+                            <div>
+                                <div className={'analysis__section_name'}>
+                                    <h1>
+                                        <mark>Комбинирование</mark>
+                                    </h1>
+                                    <p>- рекомендации по комбинированию средства с различными компонентами</p>
+                                </div>
+                                <div className={'analysis__item'}>
+                                    <CombCard combs={analysis.analysis.combs}/>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 :

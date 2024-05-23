@@ -15,7 +15,7 @@ import HandleTesseract from "./Calculations/HandleTesseractProc/HandleTesseract"
 import HandleTesseractProcessing from "./Calculations/HandleTesseractProc/HandleTesseractProcessing";
 import {Context} from "../../index";
 
-const IngredientListInput = ({set_ingrList}) => {
+const IngredientListInput = ({set_ingrList, styleType}) => {
     // тип ввода: txt, img, edit, processing, final - для навигации этапов ввода данных
     const [typeInput, setTypeInput] = useState('txt');
     // нормализованный состав (не кортежи) после Textarea
@@ -74,12 +74,6 @@ const IngredientListInput = ({set_ingrList}) => {
         setNormText(a);
     }
 
-    // useEffect(() => {
-    //     if (finalList) {
-    //         set_ingrList(finalList);
-    //     }
-    // }, [finalList]);
-
     useEffect(() => {
         if (normText) {
             set_ingrList(normText);
@@ -97,9 +91,14 @@ const IngredientListInput = ({set_ingrList}) => {
     useEffect(() => {
         if (croppedImage) {
             setTypeInput('processing');
-            HandleTesseract({image: croppedImage, setText: set_recText, setTypeInput: set_typeInput});
+            // HandleTesseract({image: croppedImage, setText: set_recText, typeInput: typeInput});
         }
     }, [croppedImage]);
+    useEffect(() => {
+        if (typeInput === 'processing') {
+            HandleTesseract({image: croppedImage, setText: set_recText, typeInput: typeInput});
+        }
+    }, [typeInput]);
 
     // если текст на изображении распознан, включается режим ввода концентраций
     useEffect(() => {
@@ -110,35 +109,40 @@ const IngredientListInput = ({set_ingrList}) => {
             const ingr_names = ingr.ingrNames.ingr_names;
             setNormText(HandleNormalization(recText, ingr_names));
             setTypeInput('final');
+            setImage(null);
         }
     }, [recText]);
 
     return (
-        <div className={"wrapper"}>
-            <div className={"wrapper__input"}>
-                <NavbarInput setTypeInput={set_typeInput}/>
+        <div className={styleType ? "wrapper" : "wrapper__comparison"}>
+            <div className={styleType ? "wrapper__input" : "wrapper__input__comparison"}>
+                <NavbarInput setTypeInput={set_typeInput} styleType={styleType}/>
 
-                <div className={"input__field"}>
-                    {typeInput === 'img' ?
-                        <Dropzone setImage={set_image}/>
-                    : typeInput === 'edit' ?
-                        <ImageEdit setTypeInput={set_typeInput} setImage={set_image} setCroppedImage={set_CroppedImage} image={image}/>
-                    : typeInput === 'processing' ?
-                        <HandleTesseractProcessing typeInput={typeInput}/>
-                    : typeInput === 'processing_error' ?
-                        <HandleTesseractProcessing typeInput={typeInput}/>
-                    :
-                        <Textarea handleNormalize={handleNormalization} recText={recText} setTypeInput={set_typeInput}/>
-                    }
+                <div className={styleType? 'input__wrapper' : 'input__wrapper__comparison'}>
+                    <div className={styleType? "input__field" : 'input__field__comparison'}>
+                        {typeInput === 'img' ?
+                            <Dropzone setImage={set_image}/>
+                            : typeInput === 'edit' ?
+                                <ImageEdit setTypeInput={set_typeInput} setImage={set_image} setCroppedImage={set_CroppedImage} image={image} styleType={styleType}/>
+                                : typeInput === 'processing' ?
+                                    <HandleTesseractProcessing typeInput={typeInput}/>
+                                    : typeInput === 'processing_error' ?
+                                        <HandleTesseractProcessing typeInput={typeInput}/>
+                                        :
+                                        <Textarea handleNormalize={handleNormalization} recText={recText} setTypeInput={set_typeInput} styleType={styleType}/>
+                        }
+                    </div>
+
+                    <div className={"wrapper__input2"}>
+                        {typeInput === 'final' ?
+                            <Concentrations normText={normText} setFinalList={set_finalList}/>
+                            :
+                            <Instructions typeInput={typeInput}/>
+                        }
+                    </div>
                 </div>
 
-                <div className={"wrapper__input2"}>
-                    {typeInput === 'final' ?
-                        <Concentrations normText={normText} setFinalList={set_finalList}/>
-                        :
-                        <Instructions typeInput={typeInput}/>
-                    }
-                </div>
+
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './Profile.css';
 import {FAVS_ROUTE, HIST_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
 import HistoryProfile from "../../components/Profile/HistoryProfile/HistoryProfile";
@@ -7,17 +7,41 @@ import NavbarProfile from "../../components/Profile/NavbarProfile/NavbarProfile"
 import {PiClockClockwise, PiHeart} from "react-icons/pi";
 import {NavLink, useNavigate} from "react-router-dom";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {LOADING_STATUS} from "../../store/storeUtils";
 
-const Profile = () => {
+const Profile = observer(() => {
     const isOption = window.location.pathname === HIST_ROUTE;
     const {user} = useContext(Context);
     const navigate = useNavigate();
 
+    if(!user) return null;
 
     const handleLogout = async () => {
         await user.logout();
         navigate(LOGIN_ROUTE);
     }
+
+    useEffect(() => {
+        if (user && [LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(user.historyLoadingStatus)) return;
+        if ([LOADING_STATUS.SUCCESS, LOADING_STATUS.LOADING].includes(user.favsLoadingStatus)) return;
+        const fetchHist = async () => {
+            try {
+                await user.fetchHistory('history');
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        const fetchFavorites = async () => {
+            try {
+                await user.fetchFavs('favorites');
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchHist();
+        fetchFavorites();
+    }, [user]);
 
     return (
         <div className="wrapper">
@@ -43,19 +67,46 @@ const Profile = () => {
                 </div>
             </div>
 
+
             {isOption ?
-                <div>
-                    <h3>История анализированных составов</h3>
-                    <HistoryProfile />
+                <div className={"wrapper"}>
+                    <div className={'profile-tab'}><h1>История анализированных составов</h1></div>
+                    {
+                        user.historyLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
+                    }
+                    {
+                        user.historyLoadingStatus === LOADING_STATUS.ERROR && "Error"
+                    }
+                    {
+                        user.historyLoadingStatus === LOADING_STATUS.IDLE && "No data"
+                    }
+                    {
+                        user.historyLoadingStatus === LOADING_STATUS.SUCCESS &&
+                        user.history &&
+                        <HistoryProfile user={user}/>
+                    }
                 </div>
                 :
-                <div>
-                    <h3>Избранные составы</h3>
-                    <FavoritesProfile />
+                <div className={"wrapper"}>
+                    <div className={'profile-tab'}><h1>Избранные составы</h1></div>
+                    {
+                        user.favsLoadingStatus === LOADING_STATUS.LOADING && "Loading..."
+                    }
+                    {
+                        user.favsLoadingStatus === LOADING_STATUS.ERROR && "Error"
+                    }
+                    {
+                        user.favsLoadingStatus === LOADING_STATUS.IDLE && "No data"
+                    }
+                    {
+                        user.favsLoadingStatus === LOADING_STATUS.SUCCESS &&
+                        user.favs &&
+                        <FavoritesProfile user={user}/>
+                    }
                 </div>
             }
         </div>
     );
-};
+});
 
 export default Profile;

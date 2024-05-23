@@ -3,7 +3,7 @@ import './Textarea.css'
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 
-const Textarea = observer(({handleNormalize, recText, setTypeInput}) => {
+const Textarea = observer(({handleNormalize, recText, setTypeInput, styleType}) => {
     const [Text, setText] = useState(''); // введенный состав
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Textarea = observer(({handleNormalize, recText, setTypeInput}) => {
 
     return (
         <div>
-            <textarea className={'textarea_input'}
+            <textarea className={styleType ? 'textarea_input' : 'textarea_input_comparison'}
                       name='inputText'
                       value={Text}
                       onChange={handleChange}
