@@ -27,6 +27,9 @@
 .general_info__item {
     padding: 5px 20px;
     width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .general_info__icon__wrapper {
     margin: 10px;

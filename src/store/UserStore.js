@@ -1,18 +1,20 @@
 import {makeAutoObservable} from "mobx";
 
-import {check, fetchFavs, fetchHistory, login, logout, registration} from "../http/userAPI";
+import {check, fetchFavs, fetchHistory, login, logout, registration, sendKey} from "../http/userAPI";
 import {LOADING_STATUS} from "./storeUtils";
 
 class UserStore {
     userLoadingStatus = LOADING_STATUS.IDLE;
     favsLoadingStatus = LOADING_STATUS.IDLE;
     historyLoadingStatus = LOADING_STATUS.IDLE;
+    keySendingStatus = LOADING_STATUS.IDLE;
 
     constructor() {
         this._isAuth = false;
         this._user = {};
         this._history = [];
         this._favs = [];
+        this._key = {};
 
         makeAutoObservable(this); // следим за изменениями переменных
     }
@@ -30,6 +32,9 @@ class UserStore {
     setFavs(favs) {
         this._favs = favs;
     }
+    setKey(key) {
+        this._key = key;
+    }
 
     // вызываются только в случае если переменная была изменена
     get isAuth() {
@@ -43,6 +48,21 @@ class UserStore {
     }
     get favs() {
         return this._favs;
+    }
+    get key() {
+        return this._key;
+    }
+
+    async sendKey(key) {
+        this.keySendingStatus = LOADING_STATUS.LOADING;
+        try {
+            // const response = await sendKey(key);
+            // console.log(response);
+            this.keySendingStatus = LOADING_STATUS.SUCCESS;
+        } catch (e) {
+            this.keySendingStatus = LOADING_STATUS.ERROR;
+            console.log(e.message);
+        }
     }
 
     async register(username, email, pass, pass2) {
@@ -114,6 +134,20 @@ class UserStore {
             this.historyLoadingStatus = LOADING_STATUS.ERROR;
         }
     }
+
+    async fetchHistory(option) {
+        this.historyLoadingStatus = LOADING_STATUS.LOADING;
+
+        try {
+            const response = await fetchHistory(option);
+            this.setHistory(response);
+            this.historyLoadingStatus = LOADING_STATUS.SUCCESS;
+        } catch(e) {
+            console.log(e.message);
+            this.historyLoadingStatus = LOADING_STATUS.ERROR;
+        }
+    }
+
 
 }
 

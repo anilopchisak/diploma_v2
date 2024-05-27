@@ -1,6 +1,11 @@
 import {$authHost, $host} from "./index";
 import {jwtDecode} from "jwt-decode";
 
+export const sendKey = async (key) => {
+    const {data} = await $host.post('http://localhost:8000/users/login/', {key});
+    return data;
+}
+
 export const registration = async (username, email, password1, password2) => {
     const {data} = await $host.post('http://localhost:8000/users/register/', {username, email, password1, password2});
     // localStorage.setItem('token', data.access);

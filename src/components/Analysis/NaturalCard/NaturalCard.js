@@ -4,10 +4,10 @@ import { PiFlask, PiFlower, PiFlowerTulip, PiTree } from "react-icons/pi";
 import {Chart as ChartJS} from 'chart.js/auto';
 import {Doughnut} from "react-chartjs-2";
 
-const NaturalCard = ({natural}) => {
+const NaturalCard = ({natural, styleType}) => {
     return (
         <div className={'natural-card__wrapper'}>
-            <div className={'natural__item'}>
+            <div className={styleType? 'natural__item' : 'natural__item__comparison'}>
                 <Doughnut
                     data={{
                         labels: [

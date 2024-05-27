@@ -7,3 +7,9 @@
 .natural__item {
     width: 25rem;
 }
+.natural__item__comparison {
+    width: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

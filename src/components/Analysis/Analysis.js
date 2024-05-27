@@ -89,7 +89,7 @@ const Analysis = () => {
                                 }
                             </div>
                             {analysis.analysis.data.natural &&
-                                <NaturalCard natural={analysis.analysis.data.natural}/>
+                                <NaturalCard natural={analysis.analysis.data.natural} styleType={true}/>
                             }
                         </div>
                     </div>

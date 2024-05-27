@@ -67,3 +67,10 @@
     padding: 25px 50px 25px 0;
     overflow: auto;
 }
+
+.wrapper__input2__comparison {
+    margin-left: 50px;
+    padding: 25px 50px 25px 0;
+    overflow: auto;
+    height: 30rem;
+}

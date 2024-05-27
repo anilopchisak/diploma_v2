@@ -16,19 +16,16 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image, styleType}) 
 
     // Вычисление соотношения сторон изображения
     useEffect(() => {
-        setCrop({x: 0, y:0});
-        setZoom(1);
-        setRotation(0);
-        setAspect(null);
-
-        const imageObj = new Image();
-        imageObj.src = image;
-        imageObj.onload = () => {
-            const { naturalWidth, naturalHeight } = imageObj;
-            const aspectRatio = naturalWidth / naturalHeight;
-            setCustomAspect(aspectRatio);
-            setAspect(aspectRatio)
-        };
+        if(image) {
+            const imageObj = new Image();
+            imageObj.src = image;
+            imageObj.onload = () => {
+                const { naturalWidth, naturalHeight } = imageObj;
+                const aspectRatio = naturalWidth / naturalHeight;
+                setCustomAspect(aspectRatio);
+                setAspect(aspectRatio)
+            };
+        }
     }, [image]);
 
     const onCropChange = (crop, percentCrop) => {
@@ -81,6 +78,9 @@ const ImageEdit = ({setTypeInput, setImage, setCroppedImage, image, styleType}) 
                 // console.log('Cropped Image:', croppedDataURL);
                 // Здесь вы можете отправить croppedDataURL на сервер или использовать его по своему усмотрению
             }
+        }
+        else {
+            setCroppedImage(image);
         }
     }
 

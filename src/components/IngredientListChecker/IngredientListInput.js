@@ -98,6 +98,20 @@ const IngredientListInput = ({set_ingrList, styleType}) => {
         if (typeInput === 'processing') {
             HandleTesseract({image: croppedImage, setText: set_recText, typeInput: typeInput});
         }
+        else if (typeInput === 'img') {
+            setNormText('');
+            set_ingrList('');
+        }
+        else if (typeInput === 'txt') {
+            setNormText('');
+            setRecText('');
+            setImage(null);
+            setCroppedImage(null);
+            set_ingrList('');
+        }
+        // else if (typeInput === 'img') {
+        //     setNormText('');
+        // }
     }, [typeInput]);
 
     // если текст на изображении распознан, включается режим ввода концентраций
@@ -133,7 +147,7 @@ const IngredientListInput = ({set_ingrList, styleType}) => {
                         }
                     </div>
 
-                    <div className={"wrapper__input2"}>
+                    <div className={styleType ? "wrapper__input2" : "wrapper__input2__comparison"}>
                         {typeInput === 'final' ?
                             <Concentrations normText={normText} setFinalList={set_finalList}/>
                             :
