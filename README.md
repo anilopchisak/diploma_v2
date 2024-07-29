@@ -1,10 +1,12 @@
 Клиентская часть для анализа составов косметических средств была написана в качестве выпускной квалификационной работы. 
 
-Ссылка на видео работы программы: https://youtu.be/OrOAe-IfNws
+Ссылка на короткое видео работы программы: https://youtu.be/xG4vtDPZf9Y
+
+Ссылка на длинное видео работы программы: https://youtu.be/OrOAe-IfNws
 
 Ссылка на серверную часть: https://github.com/ImAClownAndDontComplain/app_vkr
 
-Стек технологий: JS, HTML, CSS, React.js, Tesseract.js, MobX, jaro-winkler library
+Стек технологий: JS, HTML, CSS, React.js, Tesseract.js (распознавание состава на фото), MobX, jaro-winkler library (проверка на опечатки)
 
 ![image](https://github.com/user-attachments/assets/1e274e55-1326-4af9-92ad-d8c0ddcab765)
 
